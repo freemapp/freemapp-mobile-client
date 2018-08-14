@@ -1,0 +1,29 @@
+fma-subscriber-item {
+
+}
+
+fma-subscriber-item > ion-card {
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.subscriber-item-container {
+  padding-top: 75px;
+  background-size: 55%;
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+  background-origin: border-box;
+}
+
+.subscriber-profile-container {
+  background-color: #ffffffdd;
+
+  ion-item {
+    background-color: transparent;
+  }
+
+  ion-card-content {
+    background-color: transparent;
+  }
+}

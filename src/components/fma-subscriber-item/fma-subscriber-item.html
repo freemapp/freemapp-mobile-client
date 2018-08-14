@@ -1,0 +1,37 @@
+<ion-card full>
+
+  <!-- <img [src]="avatar" alt="avatar" /> -->
+  <!-- <img src="./assets/imgs/default-avatar.jpg" alt="avatar" /> -->
+
+  <div class="subscriber-item-container" [ngStyle]="coverImage">
+
+    <div class="subscriber-profile-container">
+
+      <ion-item>
+
+        <ion-avatar item-start>
+          <img src="./assets/imgs/default-avatar.jpg" alt="avatar" />
+        </ion-avatar>
+
+        <h4>{{ subscriber.name }}</h4>
+
+      </ion-item>
+      <ion-card-content>
+
+        {{ subscriber.bio }}
+
+      </ion-card-content>
+
+      <ion-item>
+
+        <ion-badge *ngFor="let service of subscriber.services" color="secondary" margin-right>{{ service }}</ion-badge>
+
+      </ion-item>
+
+      <button ion-item text-capitalize text-center color="primary" (click)="viewSubscriber()">view</button>
+
+    </div>
+
+  </div>
+
+</ion-card>

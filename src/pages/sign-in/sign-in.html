@@ -1,0 +1,30 @@
+
+<ion-content>
+
+  <img src="./assets/imgs/logo2.png" alt="banner" />
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>e-mail</ion-label>
+    <ion-input type="email" autofocus [(ngModel)]="email"></ion-input>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>password</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+
+  </ion-item>
+
+  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="signIn()">sign in</button>
+  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="newUser()">new user</button>
+
+  <div text-center padding-top>
+    <a href="#" (click)="forgotPassword()" text-capitalize>forgot password?</a>
+  </div>
+  <div text-center padding-top>
+    <a href="#" (click)="verifyEmail()" text-capitalize>verify e-mail?</a>
+  </div>
+
+</ion-content>

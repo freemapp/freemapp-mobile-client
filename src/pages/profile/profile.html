@@ -1,0 +1,44 @@
+
+<ion-content>
+
+  <fma-app-heading></fma-app-heading>
+
+  <ion-item>
+
+    <ion-avatar item-start>
+
+      <img src="assets/imgs/default-avatar.jpg" alt="avatar" />
+
+    </ion-avatar>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>email</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.email"></ion-input>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>name</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.name"></ion-input>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>bio</ion-label>
+    <ion-textarea type="text" [(ngModel)]="profile.bio"></ion-textarea>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label stacked text-capitalize>services</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.services"></ion-input>
+
+  </ion-item>
+
+</ion-content>
