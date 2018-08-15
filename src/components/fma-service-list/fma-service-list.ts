@@ -17,4 +17,8 @@ export class FmaServiceListComponent {
   constructor() {
   }
 
+  itemClicked(event) {
+    console.log(event);
+  }
+
 }

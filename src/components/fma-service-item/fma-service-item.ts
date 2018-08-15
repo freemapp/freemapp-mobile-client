@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 /**
@@ -17,6 +17,7 @@ import { NavController } from 'ionic-angular';
 })
 export class FmaServiceItemComponent {
 
+  @Output('on-click') onClick: EventEmitter<any>;
   @Input() service: {
     name: string,
     icon: string
@@ -27,10 +28,11 @@ export class FmaServiceItemComponent {
   }
 
   constructor(public navCtrl: NavController) {
+    this.onClick = new EventEmitter<any>();
   }
 
-  navService(): void {
-
+  clicked(): void {
+    this.onClick.emit(this.service);
   }
 
 }

@@ -3,7 +3,7 @@
 
   <ion-row nowrap>
 
-    <fma-service-item *ngFor="let service of services" [service]="service"></fma-service-item>
+    <fma-service-item *ngFor="let service of services" [service]="service" (on-click)="itemClicked($event)"></fma-service-item>
 
   </ion-row>
 
