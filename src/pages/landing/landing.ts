@@ -66,7 +66,7 @@ export class LandingPage {
           subscriberid: "c204800f-0014-4a45-bbb6-45bd1b1f8704",
           email: "hanness@ovationsgroup.com",
           name: "Sennah Leopenaws",
-          bio: "Donnigoewatjyniwilli",
+          bio: "Aliquam scelerisque urna in tortor suscipit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam scelerisque enim eget nibh sollicitudin pharetra.",
           services: [
             "plumbing"
           ]
@@ -74,7 +74,7 @@ export class LandingPage {
           subscriberid: "d0439ba0-12cf-4ec3-8cd4-3d0013e467a6",
           email: "that.other.guy.i.know@gmail.com",
           name: "Hannes Swanepoel",
-          bio: "Williwerki",
+          bio: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis vel massa eget nisl cursus eleifend ut ac urna.",
           services: [
             "electrician"
           ]
@@ -82,7 +82,7 @@ export class LandingPage {
           subscriberid: "02cf94db-dca7-45c3-b3af-1127151cdaa4",
           email: "finbergnico@gmail.com",
           name: "Nico Finberg",
-          bio: "Droomgroot",
+          bio: "Praesent auctor orci at magna gravida aliquam. Phasellus malesuada sollicitudin neque, non dapibus purus posuere et. Mauris nisl eros, bibendum at nisi vitae, venenatis sodales purus.",
           services: [
             "aupair",
             "personal training"
