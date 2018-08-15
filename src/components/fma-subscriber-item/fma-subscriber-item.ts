@@ -18,8 +18,8 @@ import { NavController } from 'ionic-angular';
 })
 export class FmaSubscriberItemComponent {
 
-  @Output('clicked') onClick: EventEmitter<any>;
-  @Input() private subscriber: any;
+  @Output('button-tapped') buttonTappedEmitter: EventEmitter<any>;
+  @Input() subscriber: any;
 
   get coverClass(): string {
     return `fma-sub-cvr-${ this.subscriber.subscriberid }`;
@@ -29,11 +29,11 @@ export class FmaSubscriberItemComponent {
   }
 
   constructor(public navCtrl: NavController) {
-    this.onClick = new EventEmitter<any>();
+    this.buttonTappedEmitter = new EventEmitter<any>();
   }
 
-  onClicked() {
-    this.onClick.emit(this.subscriber);
+  onButtonTapped() {
+    this.buttonTappedEmitter.emit(this.subscriber);
   }
 
 }

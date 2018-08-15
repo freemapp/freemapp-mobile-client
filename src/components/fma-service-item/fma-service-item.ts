@@ -17,7 +17,7 @@ import { NavController } from 'ionic-angular';
 })
 export class FmaServiceItemComponent {
 
-  @Output('clicked') onClick: EventEmitter<any>;
+  @Output('tapped') tappedEmitter: EventEmitter<any>;
   @Input() service: {
     name: string,
     icon: string
@@ -28,11 +28,11 @@ export class FmaServiceItemComponent {
   }
 
   constructor(public navCtrl: NavController) {
-    this.onClick = new EventEmitter<any>();
+    this.tappedEmitter = new EventEmitter<any>();
   }
 
-  onClicked(): void {
-    this.onClick.emit(this.service);
+  onTapped() {
+    this.tappedEmitter.emit(this.service);
   }
 
 }
