@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Loading, LoadingController } from 'ionic-angular';
-import { RequestOptionsArgs, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/concat';
+import { DataProvider } from '../../providers/data/data';
 
 @Component({
   selector: 'page-landing',
@@ -18,126 +18,88 @@ export class LandingPage {
   subscribers: any;
   error: any;
 
-  constructor(private http: Http, private loader: LoadingController) { }
+  constructor(private dataSvc: DataProvider, private loader: LoadingController) { }
 
   ionViewDidLoad() {
     this.loading = this.loader.create({ content: 'Fetching services...' });
     this.loading.present();
 
-    // this.getData().subscribe(
-    //     result => {
-    //       this.subscribers = result[0];
-    //       this.services = result[1];
+    this.getData().subscribe(
+        result => {
+          this.subscribers = result[0];
+          this.services = result[1];
 
-    //       this.loading.dismiss();
-    //     },
-    //     error => {
-    //       this.error = error;
-    //     });
-
-    setTimeout(() => {
-      this.services = [{
-          name: "tutor",
-          icon: "tutor"
-        }, {
-          name: "mechanic",
-          icon: "mechanic"
-        }, {
-          name: "plumbing",
-          icon: "plumbing"
-        }, {
-          name: "diy",
-          icon: "diy"
-        }, {
-          name: "personal training",
-          icon: "personal-training"
-        }, {
-          name: "electrician",
-          icon: "electrician"
-        }, {
-          name: "aupair",
-          icon: "aupair"
-        }, {
-          name: "security",
-          icon: "security"
-        }
-      ];
-      this.subscribers = [{
-          subscriberid: "c204800f-0014-4a45-bbb6-45bd1b1f8704",
-          email: "hanness@ovationsgroup.com",
-          name: "Sennah Leopenaws",
-          bio: "Aliquam scelerisque urna in tortor suscipit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam scelerisque enim eget nibh sollicitudin pharetra.",
-          services: [
-            "plumbing"
-          ]
-        }, {
-          subscriberid: "d0439ba0-12cf-4ec3-8cd4-3d0013e467a6",
-          email: "that.other.guy.i.know@gmail.com",
-          name: "Hannes Swanepoel",
-          bio: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis vel massa eget nisl cursus eleifend ut ac urna.",
-          services: [
-            "electrician"
-          ]
-        }, {
-          subscriberid: "02cf94db-dca7-45c3-b3af-1127151cdaa4",
-          email: "finbergnico@gmail.com",
-          name: "Nico Finberg",
-          bio: "Praesent auctor orci at magna gravida aliquam. Phasellus malesuada sollicitudin neque, non dapibus purus posuere et. Mauris nisl eros, bibendum at nisi vitae, venenatis sodales purus.",
-          services: [
-            "aupair",
-            "personal training"
-          ]
-        }];
-
-      this.loading.dismiss();
-    }, 180);
+          this.loading.dismiss();
+        },
+        error => {
+          this.error = error;
+        });
   }
 
   getData() {
-    return Observable.forkJoin([ this.getSubscribers(), this.getServices() ]);
-  }
-
-  getServices() {
-    let url: string = 'https://brblt7abh0.execute-api.us-east-2.amazonaws.com/dev/service';
-    let method: string = "GET";
-
-    let headers: Headers = new Headers();
-    headers.append("content-type", "application/json");
-
-    let options: RequestOptionsArgs = {
-      method: method,
-      url: url
-    };
-
-    return this.http.get(url, options)
-      .map((response: Response) => response.json());
-  }
-
-  getSubscribers() {
-    let url: string = 'https://dbep3uy1fc.execute-api.us-east-2.amazonaws.com/dev/subscriber';
-    let method: string = "GET";
-    let params = {
-      svc: '*'
-    }
-
-    let headers: Headers = new Headers();
-    headers.append("content-type", "application/json");
-
-    let options: RequestOptionsArgs = {
-      method: method,
-      params: params,
-      url: url
-    };
-
-    return this.http.get(url, options)
-      .map((response: Response) => response.json());
+    let mockSubs = [{
+        subscriberid: "c204800f-0014-4a45-bbb6-45bd1b1f8704",
+        email: "hanness@ovationsgroup.com",
+        name: "Sennah Leopenaws",
+        bio: "Aliquam scelerisque urna in tortor suscipit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam scelerisque enim eget nibh sollicitudin pharetra.",
+        services: [
+          "plumbing"
+        ]
+      }, {
+        subscriberid: "d0439ba0-12cf-4ec3-8cd4-3d0013e467a6",
+        email: "that.other.guy.i.know@gmail.com",
+        name: "Hannes Swanepoel",
+        bio: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis vel massa eget nisl cursus eleifend ut ac urna.",
+        services: [
+          "electrician"
+        ]
+      }, {
+        subscriberid: "02cf94db-dca7-45c3-b3af-1127151cdaa4",
+        email: "finbergnico@gmail.com",
+        name: "Nico Finberg",
+        bio: "Praesent auctor orci at magna gravida aliquam. Phasellus malesuada sollicitudin neque, non dapibus purus posuere et. Mauris nisl eros, bibendum at nisi vitae, venenatis sodales purus.",
+        services: [
+          "aupair",
+          "personal training"
+        ]
+      }];
+    let mockSvcs = [{
+        name: "tutor",
+        icon: "tutor"
+      }, {
+        name: "mechanic",
+        icon: "mechanic"
+      }, {
+        name: "plumbing",
+        icon: "plumbing"
+      }, {
+        name: "diy",
+        icon: "diy"
+      }, {
+        name: "personal training",
+        icon: "personal-training"
+      }, {
+        name: "electrician",
+        icon: "electrician"
+      }, {
+        name: "aupair",
+        icon: "aupair"
+      }, {
+        name: "security",
+        icon: "security"
+      }
+    ];
+    return Observable.combineLatest([ Observable.of(mockSubs), Observable.of(mockSvcs) ]);
+    // return Observable.forkJoin([ this.dataSvc.getSubscribers(), this.dataSvc.getServices() ]);
   }
 
   onItemTapped(service) {
+    // TODO: Navigate to "service subscribers" page
     console.log('SERVICE', service);
   }
 
   onItemButtonTapped(subscriber) {
+    // TODO: Navigate to "read only profile" page
     console.log('SUBSCRIBER', subscriber);
   }
 

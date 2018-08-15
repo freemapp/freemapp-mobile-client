@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Auth, API } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { Observable } from 'rxjs';
+import { DataProvider } from '../data/data';
 
 /*
   Generated class for the AuthProvider provider.
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthProvider {
 
-  constructor(public storage: Storage) {
+  constructor(public storage: Storage, private dataSvc: DataProvider) {
 
   }
 
@@ -50,9 +51,7 @@ export class AuthProvider {
   }
 
   private authorise(subscriberid: string): Observable<any> {
-    let userInfoPromise = API.get('subscribers', `/${ subscriberid }`, { response: false });
-
-    return Observable.fromPromise(userInfoPromise);
+    return this.dataSvc.getSubscriber(subscriberid);
   }
 
   private authorised(profile: any): Observable<any> {
