@@ -28,7 +28,6 @@ export class FmaSubscriberItemComponent {
   }
 
   constructor(public navCtrl: NavController) {
-    console.debug('construct fma-sub-itm');
   }
 
   viewSubscriber() {
