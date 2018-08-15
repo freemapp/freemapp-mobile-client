@@ -134,7 +134,11 @@ export class LandingPage {
   }
 
   serviceSelected(service) {
-    console.log(service);
+    console.log('SERVICE', service);
+  }
+
+  subscriberSelected(subscriber) {
+    console.log('SUBSCRIBER', subscriber);
   }
 
 }
