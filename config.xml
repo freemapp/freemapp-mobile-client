@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="co.za.freemapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>FreeMApp</name>
     <description>Freelance Mobile Application.</description>
-    <author email="freemapp.application@gmail.com" href="http://www.t0g.co.za/">FreeMApp</author>
+    <author email="freemapp.application@gmail.com" href="http://www.freemapp.co.za/">FreeMApp</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

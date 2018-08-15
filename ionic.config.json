@@ -1,6 +1,6 @@
 {
   "name": "FreeMApp",
-  "app_id": "",
+  "app_id": "co.za.freemapp",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
