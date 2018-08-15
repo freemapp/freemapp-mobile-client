@@ -5,17 +5,13 @@ fma-service-item {
 
 }
 
-.fma-service-item {
+.fma-service-button {
   width: $dimensions;
   height: $dimensions;
   border: 1px solid transparent;
   padding: 0;
   // border-radius: 50%;
-}
-
-.fma-service-item > img {
-  width: $dimensions;
-  height: $dimensions;
+  background-size: contain;
 }
 
 .fma-service-item > label {
