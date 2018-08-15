@@ -1,16 +1,7 @@
-<!-- <div class="fma-service-list">
-
-  <ion-scroll scrollX="true">
-    <ion-list>
-      <fma-service-item *ngFor="let service of services" [service]="service"></fma-service-item>
-    </ion-list>
-  </ion-scroll>
-
-</div> -->
 
 <ion-scroll *ngIf="services" scrollX="true">
 
-  <ion-row nowrap [style.width.px]="services.length * 55">
+  <ion-row nowrap>
 
     <fma-service-item *ngFor="let service of services" [service]="service"></fma-service-item>
 

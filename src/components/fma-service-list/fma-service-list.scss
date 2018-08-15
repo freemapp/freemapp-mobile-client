@@ -1,13 +1,15 @@
 fma-service-list {
-
+  fma-service-item:first-child {
+    padding-left: 10px;
+  }
+  fma-service-item:last-child {
+    padding-right: 10px;
+  }
 }
 
 ion-scroll {
   white-space: nowrap;
-  height: 60px;
+  height: 42.5px;
   overflow: hidden;
 }
 
-.scroll-content {
-  padding-top: 0;
-}

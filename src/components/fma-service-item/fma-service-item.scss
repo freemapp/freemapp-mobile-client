@@ -2,18 +2,27 @@
 $dimensions: 55px;
 
 fma-service-item {
-
+  // padding: 0 10px;
 }
 
 .fma-service-button {
-  width: $dimensions;
-  height: $dimensions;
-  border: 1px solid transparent;
-  padding: 0;
-  // border-radius: 50%;
-  background-size: contain;
+  padding-left: 0;
 }
 
-.fma-service-item > label {
-  display: block;
+.fma-service-icon {
+  width: $dimensions;
+  height: $dimensions;
+  // border: 1px solid transparent;
+  padding: 0;
+  // border-radius: 50%;
+  background-size: cover;
+  background-position: left;
+  z-index: 1;
+}
+
+.fma-service-label {
+  text-align: center;
+  // width: $dimensions;
+  white-space: normal;
+  padding-left: 5px;
 }

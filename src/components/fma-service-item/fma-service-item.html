@@ -1,12 +1,22 @@
 
-<div ion-button color="light" [ngClass]="[ 'fma-service-button', iconClass ]">
+<!-- <div ion-button class="fma-service-button" color="secondary">
 
-  <!-- <ion-thumbnail>
+  <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div>
+  <div class="fma-service-label" text-capitalize item-end>
 
-    <img [src]="getAvatar" alt="icon" />
+    {{ service.name }}
 
-  </ion-thumbnail> -->
+  </div>
 
-  <!-- <label>{{service}}</label> -->
+</div> -->
 
-</div>
+<button ion-button class="fma-service-button" color="secondary">
+
+    <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div>
+    <div class="fma-service-label" text-capitalize item-end>
+
+      {{ service.name }}
+
+    </div>
+
+  </button>
