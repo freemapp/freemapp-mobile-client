@@ -3,7 +3,7 @@
 
   <fma-app-heading></fma-app-heading>
 
-  <fma-service-list [services]="services"></fma-service-list>
-  <fma-subscriber-list [subscribers]="subscribers"></fma-subscriber-list>
+  <fma-service-list [services]="services" (item-tapped)="onItemTapped($event)"></fma-service-list>
+  <fma-subscriber-list [subscribers]="subscribers" (item-button-tapped)="onItemButtonTapped($event)"></fma-subscriber-list>
 
 </ion-content>

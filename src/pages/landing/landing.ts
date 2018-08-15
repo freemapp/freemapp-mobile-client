@@ -133,11 +133,11 @@ export class LandingPage {
       .map((response: Response) => response.json());
   }
 
-  serviceSelected(service) {
+  onItemTapped(service) {
     console.log('SERVICE', service);
   }
 
-  subscriberSelected(subscriber) {
+  onItemButtonTapped(subscriber) {
     console.log('SUBSCRIBER', subscriber);
   }
 
