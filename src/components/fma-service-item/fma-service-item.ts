@@ -31,7 +31,7 @@ export class FmaServiceItemComponent {
     this.onClick = new EventEmitter<any>();
   }
 
-  clicked(): void {
+  onClicked(): void {
     this.onClick.emit(this.service);
   }
 
