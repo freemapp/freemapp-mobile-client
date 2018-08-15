@@ -133,4 +133,8 @@ export class LandingPage {
       .map((response: Response) => response.json());
   }
 
+  serviceSelected(service) {
+    console.log(service);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -12,13 +12,16 @@ import { Observable } from 'rxjs';
   templateUrl: 'fma-service-list.html'
 })
 export class FmaServiceListComponent {
+
+  @Output('on-item-clicked') onItemClicked: EventEmitter<any>
   @Input() services: Observable<any>;
 
   constructor() {
+    this.onItemClicked = new EventEmitter<string>();
   }
 
-  itemClicked(event) {
-    console.log(event);
+  itemClicked(item) {
+    this.onItemClicked.emit(item);
   }
 
 }
