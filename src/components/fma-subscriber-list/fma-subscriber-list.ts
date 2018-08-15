@@ -12,7 +12,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 })
 export class FmaSubscriberListComponent {
 
-  @Output('button-tapped') buttonTappedEmitter: EventEmitter<any>;
+  @Output('item-button-tapped') buttonTappedEmitter: EventEmitter<any>;
   @Input() subscribers: any[];
 
   constructor() {
