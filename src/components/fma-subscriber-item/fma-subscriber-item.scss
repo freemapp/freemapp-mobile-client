@@ -1,3 +1,6 @@
+
+$dimensions: 55px;
+
 fma-subscriber-item {
 
 }
@@ -9,7 +12,7 @@ fma-subscriber-item > ion-card {
 
 .subscriber-item-container {
   padding-top: 75px;
-  background-size: 55%;
+  background-size: contain;
   background-position: top right;
   background-repeat: no-repeat;
   background-clip: border-box;
@@ -26,4 +29,13 @@ fma-subscriber-item > ion-card {
   ion-card-content {
     background-color: transparent;
   }
+}
+
+.subscriber-avatar-container {
+  width: $dimensions;
+  height: $dimensions;
+  border: 1px solid transparent;
+  padding: 0;
+  // border-radius: 50%;
+  background-size: contain;
 }

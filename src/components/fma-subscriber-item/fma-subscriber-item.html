@@ -9,11 +9,11 @@
 
       <ion-item>
 
-        <!-- <ion-avatar item-start>
-          <img [src]="avatar" alt="avatarClass" />
-        </ion-avatar> -->
-
-        <h4>{{ subscriber.name }}</h4>
+        <div item-start [ngClass]="[ 'subscriber-avatar-container', 'fma-sub-avt-default-avatar', avatarClass ]">
+        </div>
+        <div>
+          <h5>{{ subscriber.name }}</h5>
+        </div>
 
       </ion-item>
       <ion-card-content>
