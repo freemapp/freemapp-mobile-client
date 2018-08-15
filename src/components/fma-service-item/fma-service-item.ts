@@ -9,17 +9,24 @@ import { NavController } from 'ionic-angular';
  */
 @Component({
   selector: 'fma-service-item',
-  templateUrl: 'fma-service-item.html'
+  templateUrl: 'fma-service-item.html',
+  styles: [
+    'fma-service-item.scss',
+    'fma-service-icons.scss'
+  ]
 })
 export class FmaServiceItemComponent {
 
-  @Input() service: { name: string };
+  @Input() service: {
+    name: string,
+    icon: string
+  };
 
-  constructor(public navCtrl: NavController) {
+  get iconClass(): string {
+    return `fma-svc-icn-${ this.service.icon }`;
   }
 
-  get getAvatar(): string {
-    return `./assets/imgs/${ this.service.name }.png`;
+  constructor(public navCtrl: NavController) {
   }
 
   navService(): void {

@@ -9,21 +9,26 @@ import { NavController } from 'ionic-angular';
  */
 @Component({
   selector: 'fma-subscriber-item',
-  templateUrl: 'fma-subscriber-item.html'
+  templateUrl: 'fma-subscriber-item.html',
+  styles: [
+    'fma-subscriber-item.scss',
+    'fma-subscriber-avatars.scss',
+    'fma-subscriber-covers.scss'
+  ]
 })
 export class FmaSubscriberItemComponent {
 
   @Input() private subscriber: any;
 
-  get coverImage(): any {
-    return { 'background-image': `../../assets/imgs/${ this.subscriber.coverImage }` };
+  get coverClass(): string {
+    return `fma-sub-cvr-${ this.subscriber.subscriberid }`;
   }
-  get avatar(): any {
-    return `./assets/imgs/${ this.subscriber.coverImage }`;
+  get avatarClass(): string {
+    return `fma-sub-avt-${ this.subscriber.subscriberid }`;
   }
 
   constructor(public navCtrl: NavController) {
-
+    console.debug('construct fma-sub-itm');
   }
 
   viewSubscriber() {

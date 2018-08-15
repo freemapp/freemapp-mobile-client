@@ -3,15 +3,15 @@
   <!-- <img [src]="avatar" alt="avatar" /> -->
   <!-- <img src="./assets/imgs/default-avatar.jpg" alt="avatar" /> -->
 
-  <div class="subscriber-item-container" [ngStyle]="coverImage">
+  <div [ngClass]="[ 'subscriber-item-container', coverClass ]">
 
     <div class="subscriber-profile-container">
 
       <ion-item>
 
-        <ion-avatar item-start>
-          <img src="./assets/imgs/default-avatar.jpg" alt="avatar" />
-        </ion-avatar>
+        <!-- <ion-avatar item-start>
+          <img [src]="avatar" alt="avatarClass" />
+        </ion-avatar> -->
 
         <h4>{{ subscriber.name }}</h4>
 
