@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class FmaServiceListComponent {
 
-  @Output('on-item-clicked') onItemClicked: EventEmitter<any>
+  @Output('item-clicked') onItemClicked: EventEmitter<any>
   @Input() services: Observable<any>;
 
   constructor() {

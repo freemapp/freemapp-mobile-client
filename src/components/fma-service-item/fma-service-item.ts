@@ -17,7 +17,7 @@ import { NavController } from 'ionic-angular';
 })
 export class FmaServiceItemComponent {
 
-  @Output('on-click') onClick: EventEmitter<any>;
+  @Output('clicked') onClick: EventEmitter<any>;
   @Input() service: {
     name: string,
     icon: string

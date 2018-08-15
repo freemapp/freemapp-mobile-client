@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter } from '@angular/core';
 
 /**
  * Generated class for the FmaSubscriberListComponent component.
@@ -12,10 +12,15 @@ import { Component, Input } from '@angular/core';
 })
 export class FmaSubscriberListComponent {
 
+  @Object('item-clicked') onItemClicked: EventEmitter<any>;
   @Input() subscribers: any[];
 
   constructor() {
+    this.onItemClicked = new EventEmitter<any>();
+  }
 
+  itemClicked(item) {
+    this.onItemClicked.emit(item);
   }
 
 }

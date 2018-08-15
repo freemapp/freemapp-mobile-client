@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 /**
@@ -18,6 +18,7 @@ import { NavController } from 'ionic-angular';
 })
 export class FmaSubscriberItemComponent {
 
+  @Output('clicked') onClicked: EventEmitter<any>;
   @Input() private subscriber: any;
 
   get coverClass(): string {
@@ -28,10 +29,11 @@ export class FmaSubscriberItemComponent {
   }
 
   constructor(public navCtrl: NavController) {
+    this.onClicked = new EventEmitter<any>();
   }
 
-  viewSubscriber() {
-    // this.navCtrl.push(ItemPage, { subscriber: this.subscriber.subscriberid });
+  clicked() {
+    this.onClicked.emit(this.subscriber);
   }
 
 }
