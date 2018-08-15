@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Loading, LoadingController } from 'ionic-angular';
+import { Loading, LoadingController, ToastController, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/concat';
 import { DataProvider } from '../../providers/data/data';
+import { ServiceSubcribersPage } from '../service-subcribers/service-subcribers';
 
 @Component({
   selector: 'page-landing',
@@ -18,10 +19,11 @@ export class LandingPage {
   subscribers: any;
   error: any;
 
-  constructor(private dataSvc: DataProvider, private loader: LoadingController) { }
+  constructor(private dataSvc: DataProvider, private loader: LoadingController,
+    private toastCtrl: ToastController, public navCtrl: NavController) { }
 
   ionViewDidLoad() {
-    this.loading = this.loader.create({ content: 'Fetching services...' });
+    this.loading = this.loader.create({ content: 'Fetching data...' });
     this.loading.present();
 
     this.getData().subscribe(
@@ -32,7 +34,11 @@ export class LandingPage {
           this.loading.dismiss();
         },
         error => {
-          this.error = error;
+          this.toastCtrl.create({
+            dismissOnPageChange: true,
+            message: error,
+            showCloseButton: true
+          })
         });
   }
 
@@ -94,8 +100,7 @@ export class LandingPage {
   }
 
   onItemTapped(service) {
-    // TODO: Navigate to "service subscribers" page
-    console.log('SERVICE', service);
+    this.navCtrl.push(ServiceSubcribersPage, { service: service });
   }
 
   onItemButtonTapped(subscriber) {

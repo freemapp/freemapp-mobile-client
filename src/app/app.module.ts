@@ -17,6 +17,7 @@ import { ActivatePage } from '../pages/activate/activate';
 import { ProfilePage } from '../pages/profile/profile';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
+import { ServiceSubcribersPage } from '../pages/service-subcribers/service-subcribers';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DataProvider } from '../providers/data/data';
     SignUpPage,
     ResetPage,
     ActivatePage,
-    ProfilePage
+    ProfilePage,
+    ServiceSubcribersPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { DataProvider } from '../providers/data/data';
     SignUpPage,
     ResetPage,
     ActivatePage,
-    ProfilePage
+    ProfilePage,
+    ServiceSubcribersPage
   ],
   providers: [
     StatusBar,
