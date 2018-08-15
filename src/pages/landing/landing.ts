@@ -36,35 +36,57 @@ export class LandingPage {
     //     });
 
     setTimeout(() => {
-      this.services = [
-        { name: "tutor" },
-        { name: "mechanic" },
-        { name: "plumbing" },
-        { name: "diy" },
-        { name: "personalTraining" },
-        { name: "electrician" },
-        { name: "aupair" },
-        { name: "security" }
+      this.services = [{
+          name: "tutor",
+          icon: "tutor"
+        }, {
+          name: "mechanic",
+          icon: "mechanic"
+        }, {
+          name: "plumbing",
+          icon: "plumbing"
+        }, {
+          name: "diy",
+          icon: "diy"
+        }, {
+          name: "personal training",
+          icon: "personal-training"
+        }, {
+          name: "electrician",
+          icon: "electrician"
+        }, {
+          name: "aupair",
+          icon: "aupair"
+        }, {
+          name: "security",
+          icon: "security"
+        }
       ];
       this.subscribers = [{
-          subscriberid: "a2",
+          subscriberid: "c204800f-0014-4a45-bbb6-45bd1b1f8704",
           email: "hanness@ovationsgroup.com",
           name: "Sennah Leopenaws",
           bio: "Donnigoewatjyniwilli",
           services: [
-            "electrician"
-          ],
-          coverImage: "plumbing-perfection.png"
+            "plumbing"
+          ]
         }, {
-          subscriberid: "a1",
+          subscriberid: "d0439ba0-12cf-4ec3-8cd4-3d0013e467a6",
           email: "that.other.guy.i.know@gmail.com",
           name: "Hannes Swanepoel",
           bio: "Williwerki",
           services: [
-            "diy",
-            "security"
-          ],
-          coverImage: "rocco-electrical.png"
+            "electrician"
+          ]
+        }, {
+          subscriberid: "02cf94db-dca7-45c3-b3af-1127151cdaa4",
+          email: "finbergnico@gmail.com",
+          name: "Nico Finberg",
+          bio: "Droomgroot",
+          services: [
+            "aupair",
+            "personal training"
+          ]
         }];
 
       this.loading.dismiss();
