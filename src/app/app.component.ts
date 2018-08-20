@@ -6,6 +6,15 @@ import { Page } from '../../node_modules/ionic-angular/umd/navigation/nav-util';
 import { LandingPage } from '../pages/landing/landing';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { ProfilePage } from '../pages/profile/profile';
+import { AuthProvider } from '../providers/auth/auth';
+import { Observable, Subject } from 'rxjs';
+
+type MenuPage = {
+  name: string,
+  page: Page,
+  icon: string,
+  polarity?: number
+};
 
 @Component({
   templateUrl: 'app.html'
@@ -15,17 +24,44 @@ export class MyApp {
 
   rootPage: any = LandingPage;
 
-  pages: Array<{ name: string, page: Page, icon: string }>
+  pages: Array<MenuPage>
+  pagesObservable: Observable<MenuPage[]>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+    private auth: AuthProvider) {
+
+    let pages: Array<MenuPage> = [
+      { name: 'home', page: LandingPage, icon: 'md-home' },
+      { name: 'sign-in', page: SignInPage, icon: 'md-key', polarity: -1 },
+      { name: 'profile', page: ProfilePage, icon: 'md-person', polarity: 1 }];
+
+    this.pages = pages;
+    this.pagesObservable = Observable.of(pages);
+
+    this.filterPages();
+
+    this.auth.credsChanged.subscribe(creds => this.filterPages(creds));
 
     this.initializeApp();
-    this.pages = [
-      { name: 'home', page: LandingPage, icon: 'md-home' },
-      { name: 'sign-in', page: SignInPage, icon: 'md-key' },
-      { name: 'profile', page: ProfilePage, icon: 'md-person' }
-    ];
+  }
 
+  filterPages(creds?: any): void {
+    let visiblePages: MenuPage[] = this.pages.filter((page: MenuPage) => {
+      let polarity: number = page.polarity;
+      let repulsive: boolean = polarity < 0;
+      let attractive: boolean = polarity > 0;
+
+      if (repulsive) {
+        return !creds;
+      }
+      else if (attractive) {
+        return !!creds;
+      }
+      else
+        return true;
+    });
+
+    this.pagesObservable = Observable.of(visiblePages);
   }
 
   initializeApp() {

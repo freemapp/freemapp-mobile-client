@@ -18,6 +18,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
 import { ServiceSubcribersPage } from '../pages/service-subcribers/service-subcribers';
+import { CommonModule } from '../../node_modules/@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ServiceSubcribersPage } from '../pages/service-subcribers/service-subcr
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     ComponentsModule
