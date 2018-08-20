@@ -1,31 +1,42 @@
 
+$height: 175px;
+
 fma-app-heading {
+  .app-header {
+    // color: #ffffff;
+    // font-size: 50pt;
+    // height: $height;
+    // position: relative;
+    background-color: #572480;
+    background-image: url(../../assets/imgs/logo2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    padding-top: $height;
+    transition-property: padding;
+    transition-duration: 250ms;
 
-}
+    .fma-heading-searchbar {
 
-.app-header {
-  background-color: #5e2777;
-  color: #ffffff;
-  font-size: 50pt;
-  height: 150px;
-  position: relative;
-}
+    }
 
-fma-app-heading > div {
-  font-family: 'Kalam', cursive;
-  height: 100%;
-  vertical-align: middle;
-  color: #ff4702;
-  margin: 0 auto;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
+    // .fma-heading-parts {
+    //   font-family: 'Kalam', cursive;
+    //   height: 100%;
+    //   vertical-align: middle;
+    //   color: #ff4702;
+    //   margin: 0 auto;
+    //   display: flex !important;
+    //   justify-content: center !important;
+    //   align-items: center !important;
 
-.fma-app-heading-free {
-  color: #ff4702;
-}
+    //   .fma-app-heading-free {
+    //     color: #ff4702;
+    //   }
 
-.fma-app-heading-mapp {
-  color: #ffffff;
+    //   .fma-app-heading-mapp {
+    //     color: #ffffff;
+    //   }
+    // }
+  }
 }
