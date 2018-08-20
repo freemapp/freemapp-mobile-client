@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Loading, LoadingController, ToastController, NavController } from 'ionic-angular';
-import { Observable } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { Loading, LoadingController, ToastController, NavController, Content, ScrollEvent } from 'ionic-angular';
+import { Observable, Subject } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
@@ -14,35 +14,54 @@ import { ServiceSubcribersPage } from '../service-subcribers/service-subcribers'
 })
 export class LandingPage {
 
+  @ViewChild(Content) set content(element: Content) {
+    element.ionScroll.subscribe((data: ScrollEvent) => {
+      console.debug('scrolled', data.scrollTop);
+      this.contentScroll.next(data);
+    })
+  };
+  contentScroll: Subject<ScrollEvent>;
   loading: Loading;
   services: any;
   subscribers: any;
   error: any;
 
   constructor(private dataSvc: DataProvider, private loader: LoadingController,
-    private toastCtrl: ToastController, public navCtrl: NavController) { }
+    private toastCtrl: ToastController, public navCtrl: NavController) {
+
+    this.contentScroll = new Subject<ScrollEvent>();
+  }
 
   ionViewDidLoad() {
+    // this.content.ionScroll.subscribe((data: ScrollEvent) => {
+    //   console.debug('scrolled', data.scrollTop);
+    //   this.contentScroll.next(data);
+    // });
+    // console.debug(this.content);
+    this.fetchData();
+  }
+
+  fetchData() {
     this.loading = this.loader.create({ content: 'Fetching data...' });
     this.loading.present();
 
     this.getData().subscribe(
-        result => {
-          this.subscribers = result[0];
-          this.services = result[1];
+      result => {
+        this.subscribers = result[0];
+        this.services = result[1];
 
-          this.loading.dismiss();
-        },
-        error => {
-          this.toastCtrl.create({
-            dismissOnPageChange: true,
-            message: error,
-            showCloseButton: true
-          })
-        });
+        this.loading.dismiss();
+      },
+      error => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: error,
+          showCloseButton: true
+        })
+      });
   }
 
-  getData() {
+  getData(text?: string) {
     let mockSubs = [{
         subscriberid: "c204800f-0014-4a45-bbb6-45bd1b1f8704",
         email: "hanness@ovationsgroup.com",
@@ -95,8 +114,11 @@ export class LandingPage {
         icon: "security"
       }
     ];
-    return Observable.combineLatest([ Observable.of(mockSubs), Observable.of(mockSvcs) ]);
-    // return Observable.forkJoin([ this.dataSvc.getSubscribers(), this.dataSvc.getServices() ]);
+    // return Observable.combineLatest([
+    //   Observable.of(mockSubs.filter(sub => !text || (sub.name.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) > -1 || sub.bio.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) > -1))),
+    //   Observable.of(mockSvcs)
+    // ]);
+    return Observable.forkJoin([ this.dataSvc.getSubscribers(), this.dataSvc.getServices() ]);
   }
 
   onItemTapped(service) {
@@ -106,6 +128,26 @@ export class LandingPage {
   onItemButtonTapped(subscriber) {
     // TODO: Navigate to "read only profile" page
     console.log('SUBSCRIBER', subscriber);
+  }
+
+  onDoSearch(searchText: string) {
+    this.loading = this.loader.create({ content: 'Fetching data...' });
+    this.loading.present();
+
+    this.getData(searchText).subscribe(
+      result => {
+        this.subscribers = result[0];
+        this.services = result[1];
+
+        this.loading.dismiss();
+      },
+      error => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: error,
+          showCloseButton: true
+        })
+      });
   }
 
 }
