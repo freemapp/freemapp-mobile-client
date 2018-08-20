@@ -14,6 +14,16 @@ export class DataProvider {
   constructor() {
   }
 
+  searchSubscribers(criteria?: string): Observable<any> {
+    let filter = {
+      search: criteria
+    };
+
+    let subscribersPromise = API.get('subscribers', `/`, { response: false, queryStringParameters: filter });
+
+    return Observable.fromPromise(subscribersPromise);
+  }
+
   getSubscribers(filter?: any): Observable<any> {
     filter = filter || {};
     filter.svc = filter.svc || '*';
