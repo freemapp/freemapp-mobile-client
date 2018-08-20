@@ -33,11 +33,6 @@ export class LandingPage {
   }
 
   ionViewDidLoad() {
-    // this.content.ionScroll.subscribe((data: ScrollEvent) => {
-    //   console.debug('scrolled', data.scrollTop);
-    //   this.contentScroll.next(data);
-    // });
-    // console.debug(this.content);
     this.fetchData();
   }
 
