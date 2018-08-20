@@ -16,7 +16,6 @@ export class LandingPage {
 
   @ViewChild(Content) set content(element: Content) {
     element.ionScroll.subscribe((data: ScrollEvent) => {
-      console.debug('scrolled', data.scrollTop);
       this.contentScroll.next(data);
     })
   };
