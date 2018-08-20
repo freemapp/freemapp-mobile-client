@@ -24,8 +24,8 @@ export class ProfilePage {
     });
     this.loading.present();
 
-    this.auth.getProfile().subscribe(
-      (result: any) => this.populateProfile(result),
+    this.auth.getCreds().then(
+      (creds: any) => this.populateProfile(creds.subscriber),
       (reason: any) => this.handleReject(reason));
   }
 
