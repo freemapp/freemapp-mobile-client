@@ -39,7 +39,7 @@ export class SignInPage {
     });
     this.loading.present();
     // this.navCtrl.setRoot(LandingPage);
-    this.auth.signIn(this.email, this.password).subscribe(
+    this.auth.signIn(this.email, this.password).then(
       (value: any) => this.signedIn(value),
       (reason: any) => this.handleReject(reason));
   }

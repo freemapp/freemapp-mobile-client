@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Auth } from "aws-amplify";
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, Subject, Observer } from 'rxjs';
 import { DataProvider } from '../data/data';
+import { resolve } from 'path';
 
 /*
   Generated class for the AuthProvider provider.
@@ -13,65 +14,62 @@ import { DataProvider } from '../data/data';
 @Injectable()
 export class AuthProvider {
 
+  credsChanged: Subject<any>;
+  profileChanged: Subject<any>;
+
   constructor(public storage: Storage, private dataSvc: DataProvider) {
-
+    this.credsChanged = new Subject<any>();
+    this.profileChanged = new Subject<any>();
   }
 
-  signIn(email: string, password: string): Observable<any> {
-    return this.doAuthentication(email, password)
-      .flatMap(() => this.doAuthorisation())
+  signIn(email: string, password: string): Promise<any> {
+    return Auth.signIn(email, password)
+      .then((authenticationCreds: any) => {
+        return this.dataSvc.getSubscriber(authenticationCreds.username).toPromise()
+          .then((subscriber: any) => {
+            let newCreds: any = {
+              username: authenticationCreds.username,
+              tokens: {
+                id: authenticationCreds.signInUserSession.idToken.jwtToken,
+                refresh: authenticationCreds.signInUserSession.refreshToken.token,
+                access: authenticationCreds.signInUserSession.accessToken.jwtToken
+              },
+              subscriber
+            };
+
+            return this.setCreds(newCreds);
+          })
+      });
   }
 
-  private doAuthentication(email: string, password: string): Observable<any> {
-    return this.authenticate(email, password)
-      .flatMap((creds: any) => this.authenticated(creds));
+  public getCreds$(): Observable<any> {
+    return Observable.fromPromise(this.storage.get('fma_creds'));
   }
 
-  private authenticate(email: string, password: string) {
-    return Observable.fromPromise(Auth.signIn(email, password));
+  public getCreds(): Promise<any> {
+    return this.storage.get('fma_creds');
   }
 
-  private authenticated(creds: any): Observable<void> {
-    let partialCreds: any = {
-      username: creds.username,
-      tokens: {
-        id: creds.signInUserSession.idToken.jwtToken,
-        refresh: creds.signInUserSession.refreshToken.token,
-        access: creds.signInUserSession.accessToken.jwtToken
-      }
-    };
+  private setCreds$(value: any): Observable<any> {
+    this.credsChanged.next(value);
 
-    return this.setCreds(partialCreds);
+    return Observable.fromPromise(this.storage.set('fma_creds', value));
   }
 
-  private doAuthorisation(): Observable<any> {
-    return this.getCreds()
-      .flatMap((creds: any) => this.authorise(creds.username))
-      .flatMap((profile: any) => this.authorised(profile));
+  private setCreds(value: any): Promise<any> {
+    this.credsChanged.next(value);
+
+    return this.storage.set('fma_creds', value);
   }
 
-  private authorise(subscriberid: string): Observable<any> {
-    return this.dataSvc.getSubscriber(subscriberid);
+  private clearCreds$(value: any): Observable<any> {
+    this.credsChanged.next(null);
+    return Observable.fromPromise(this.storage.remove('aws_creds'));
   }
 
-  private authorised(profile: any): Observable<any> {
-    return this.setProfile(profile);
-  }
-
-  public getCreds(): Observable<any> {
-    return Observable.fromPromise(this.storage.get('aws_creds'));
-  }
-
-  public getProfile(): Observable<any> {
-    return Observable.fromPromise(this.storage.get('fma_profile'));
-  }
-
-  private setCreds(value: any): Observable<any> {
-    return Observable.fromPromise(this.storage.set('aws_creds', value));
-  }
-
-  private setProfile(value: any): Observable<any> {
-    return Observable.fromPromise(this.storage.set('fma_profile', value));
+  private clearCreds(value: any): Promise<any> {
+    this.credsChanged.next(null);
+    return this.storage.remove('aws_creds');
   }
 
 }
