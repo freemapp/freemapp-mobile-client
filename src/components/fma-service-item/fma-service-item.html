@@ -10,13 +10,13 @@
 
 </div> -->
 
-<button ion-button class="fma-service-button" color="secondary" (click)="onTapped()">
+<!-- <button ion-button class="fma-service-button" color="secondary"> -->
+<div (click)="onTapped()">
+  <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div>
+  <div class="fma-service-label" text-capitalize>
 
-    <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div>
-    <div class="fma-service-label" text-capitalize item-end>
+    {{ service.name }}
 
-      {{ service.name }}
-
-    </div>
-
-  </button>
+  </div>
+</div>
+<!-- </button> -->

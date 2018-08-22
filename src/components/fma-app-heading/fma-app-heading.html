@@ -1,9 +1,9 @@
 
-<div #appHeader class="app-header" text-center no-padding no-margin>
+<div #appHeader class="app-header fixed" text-center no-padding no-margin>
 
   <div class="fma-heading-searchbar">
 
-    <ion-searchbar (ionInput)="onIonInput($event.data)" [(ngModel)]="searchText"></ion-searchbar>
+    <ion-searchbar (ionInput)="onIonInput($event.data)" [(ngModel)]="searchText" placeholder="Search FreeMApp"></ion-searchbar>
 
   </div>
 

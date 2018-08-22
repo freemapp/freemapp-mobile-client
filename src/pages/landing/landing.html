@@ -1,7 +1,7 @@
 
-<ion-content>
+<ion-content id="rootContent">
 
-  <fma-app-heading (doSearch)="onDoSearch($event)" [onScroll]="contentScroll"></fma-app-heading>
+  <fma-app-heading (doSearch)="onDoSearch($event)"></fma-app-heading>
 
   <fma-service-list [services]="services" (item-tapped)="onItemTapped($event)"></fma-service-list>
   <fma-subscriber-list [subscribers]="subscribers" (item-button-tapped)="onItemButtonTapped($event)"></fma-subscriber-list>
