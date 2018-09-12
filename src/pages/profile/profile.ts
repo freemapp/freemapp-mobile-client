@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, Loading } from 'ionic-angular';
-import { AuthProvider } from '../../providers/auth/auth';
+import { AuthProvider } from '@fma_providers/auth/auth';
 
 @Component({
   selector: 'page-profile',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Auth } from "aws-amplify";
 import { Observable, Subscriber, Subject, Observer } from 'rxjs';
-import { DataProvider } from '../data/data';
-import { resolve } from 'path';
+import { DataProvider } from '@fma_providers/data/data';
+import { ENV } from '@fma_env';
 
 /*
   Generated class for the AuthProvider provider.

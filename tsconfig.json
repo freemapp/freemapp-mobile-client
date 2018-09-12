@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
@@ -12,10 +13,21 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "types": [ "node" ],
+    "types": [
+      "node"
+    ],
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@fma_app/*": [ "src/app/*" ],
+      "@fma_assets/*": [ "src/assets/*" ],
+      "@fma_env": [ "environments/environment" ],
+      "@fma_pages/*": [ "src/pages/*" ],
+      "@fma_providers/*": [ "src/providers/*" ],
+      "@fma_components/*": [ "src/components/*" ],
+      "@fma_theme/*": [ "src/theme/*" ]
+    }
   },
   "include": [
     "src/**/*.ts"

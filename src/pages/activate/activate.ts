@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, Loading } from 'ionic-angular';
-import { Auth } from '../../../node_modules/aws-amplify';
+import { Auth } from 'aws-amplify';
 
 /**
  * Generated class for the ActivatePage page.

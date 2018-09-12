@@ -2,16 +2,15 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Page } from '../../node_modules/ionic-angular/umd/navigation/nav-util';
-import { LandingPage } from '../pages/landing/landing';
-import { SignInPage } from '../pages/sign-in/sign-in';
-import { ProfilePage } from '../pages/profile/profile';
-import { AuthProvider } from '../providers/auth/auth';
+import { LandingPage } from '@fma_pages/landing/landing';
+import { SignInPage } from '@fma_pages/sign-in/sign-in';
+import { ProfilePage } from '@fma_pages/profile/profile';
+import { AuthProvider } from '@fma_providers/auth/auth';
 import { Observable, Subject } from 'rxjs';
 
 type MenuPage = {
   name: string,
-  page: Page,
+  page: any,
   icon: string,
   polarity?: number
 };
@@ -72,7 +71,7 @@ export class MyApp {
     });
   }
 
-  openPage(page: Page) {
+  openPage(page: any) {
     // if (this.nav.root !== page)
       this.nav.setRoot(page);
   }

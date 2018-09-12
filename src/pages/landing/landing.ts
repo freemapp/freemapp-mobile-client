@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { Loading, LoadingController, ToastController, NavController, Content, ScrollEvent } from 'ionic-angular';
 import { Observable, Subject } from 'rxjs';
 
+import { DataProvider } from '@fma_providers/data/data';
+import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/concat';
-import { DataProvider } from '../../providers/data/data';
-import { ServiceSubcribersPage } from '../service-subcribers/service-subcribers';
 
 @Component({
   selector: 'page-landing',

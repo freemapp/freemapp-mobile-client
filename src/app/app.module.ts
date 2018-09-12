@@ -4,21 +4,22 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from "@ionic/storage";
 import Amplify from 'aws-amplify';
 
-import { MyApp } from './app.component';
-import { LandingPage } from '../pages/landing/landing';
+import { MyApp } from '@fma_app/app.component';
+import { LandingPage } from '@fma_pages/landing/landing';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ComponentsModule } from '../components/components.module';
-import { SignInPage } from '../pages/sign-in/sign-in';
-import { SignUpPage } from '../pages/sign-up/sign-up';
-import { ResetPage } from '../pages/reset/reset';
-import { ActivatePage } from '../pages/activate/activate';
-import { ProfilePage } from '../pages/profile/profile';
-import { AuthProvider } from '../providers/auth/auth';
-import { DataProvider } from '../providers/data/data';
-import { ServiceSubcribersPage } from '../pages/service-subcribers/service-subcribers';
-import { CommonModule } from '../../node_modules/@angular/common';
+import { ComponentsModule } from '@fma_components/components.module';
+import { SignInPage } from '@fma_pages/sign-in/sign-in';
+import { SignUpPage } from '@fma_pages/sign-up/sign-up';
+import { ResetPage } from '@fma_pages/reset/reset';
+import { ActivatePage } from '@fma_pages/activate/activate';
+import { ProfilePage } from '@fma_pages/profile/profile';
+import { AuthProvider } from '@fma_providers/auth/auth';
+import { DataProvider } from '@fma_providers/data/data';
+import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
+import { CommonModule } from '@angular/common';
+// import { OverlayPortal } from 'ionic-angular/umd/components/app/overlay-portal';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,13 @@ import { CommonModule } from '../../node_modules/@angular/common';
   imports: [
     BrowserModule,
     CommonModule,
+    // IonicApp,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__freemapp_mobile',
         driverOrder: ['localstorage']//['indexeddb', 'sqlite', 'websql']
     }),
+    // OverlayPortal,
     ComponentsModule
   ],
   bootstrap: [IonicApp],

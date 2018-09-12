@@ -1,14 +1,16 @@
 {
     "name": "freemapp-mobile-client",
+    "description": "Freelance Mobile Application",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
     "private": true,
     "scripts": {
-        "start": "ionic-app-scripts serve",
         "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build",
-        "lint": "ionic-app-scripts lint"
+        "lint": "ionic-app-scripts lint",
+        "debug": "ionic serve --no-open",
+        "build": "ionic build",
+        "prod": "ionic build --prod"
     },
     "dependencies": {
         "@angular/animations": "5.2.11",
@@ -39,11 +41,15 @@
         "zone.js": "0.8.26"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "3.1.11",
+        "@ionic/app-scripts": "^3.2.0",
         "@types/node": "^10.5.4",
         "typescript": "~2.6.2"
     },
-    "description": "An Ionic project",
+    "config": {
+        "ionic_source_map_type": "source-map",
+        "ionic_optimization": "./config/optimization.config.js",
+        "ionic_webpack": "./config/webpack.config.js"
+    },
     "cordova": {
         "plugins": {
             "cordova-plugin-device": {},

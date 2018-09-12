@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { Auth } from '../../../node_modules/aws-amplify';
-import { ActivatePage } from '../activate/activate';
+import { Auth } from 'aws-amplify';
+import { ActivatePage } from '@fma_pages/activate/activate';
 
 /**
  * Generated class for the SignUpPage page.

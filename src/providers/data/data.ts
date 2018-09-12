@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { API } from "aws-amplify";
-import { Observable } from '../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the DataProvider provider.

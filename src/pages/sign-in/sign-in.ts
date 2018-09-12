@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading, ToastController } from 'ionic-angular';
-import { SignUpPage } from '../sign-up/sign-up';
-import { ActivatePage } from '../activate/activate';
-import { ResetPage } from '../reset/reset';
-import { LandingPage } from '../landing/landing';
-import { AuthProvider } from '../../providers/auth/auth';
+import { SignUpPage } from '@fma_pages/sign-up/sign-up';
+import { ActivatePage } from '@fma_pages/activate/activate';
+import { ResetPage } from '@fma_pages/reset/reset';
+import { LandingPage } from '@fma_pages/landing/landing';
+import { AuthProvider } from '@fma_providers/auth/auth';
 
 /**
  * Generated class for the SignInPage page.

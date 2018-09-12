@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { DataProvider } from '../../providers/data/data';
+import { DataProvider } from '@fma_providers/data/data';
 
 /**
  * Generated class for the ServiceSubcribersPage page.
