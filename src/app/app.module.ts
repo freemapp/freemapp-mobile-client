@@ -35,7 +35,10 @@ import { CommonModule } from '../../node_modules/@angular/common';
     BrowserModule,
     CommonModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__freemapp_mobile',
+        driverOrder: ['localstorage']//['indexeddb', 'sqlite', 'websql']
+    }),
     ComponentsModule
   ],
   bootstrap: [IonicApp],

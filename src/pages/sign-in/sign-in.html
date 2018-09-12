@@ -17,8 +17,14 @@
 
   </ion-item>
 
-  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="signIn()">sign in</button>
-  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="newUser()">new user</button>
+  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="signIn()">
+    <ion-icon name="log-in"></ion-icon>
+    <span>sign in</span>
+  </button>
+  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="newUser()">
+    <ion-icon name="person-add"></ion-icon>
+    <span>new user</span>
+  </button>
 
   <div text-center padding-top>
     <a href="#" (click)="forgotPassword()" text-capitalize>forgot password?</a>

@@ -26,7 +26,6 @@ export class ActivatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ActivatePage');
   }
 
   verify() {

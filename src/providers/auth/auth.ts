@@ -17,7 +17,7 @@ export class AuthProvider {
   credsChanged: Subject<any>;
   profileChanged: Subject<any>;
 
-  constructor(public storage: Storage, private dataSvc: DataProvider) {
+  constructor(private storage: Storage, private dataSvc: DataProvider) {
     this.credsChanged = new Subject<any>();
     this.profileChanged = new Subject<any>();
   }
@@ -43,6 +43,7 @@ export class AuthProvider {
   }
 
   public getCreds$(): Observable<any> {
+    if (this.dev)
     return Observable.fromPromise(this.storage.get('fma_creds'));
   }
 

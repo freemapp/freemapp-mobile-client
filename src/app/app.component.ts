@@ -38,9 +38,8 @@ export class MyApp {
     this.pages = pages;
     this.pagesObservable = Observable.of(pages);
 
-    this.filterPages();
-
     this.auth.credsChanged.subscribe(creds => this.filterPages(creds));
+    this.auth.getCreds().then(creds => this.filterPages(creds));
 
     this.initializeApp();
   }

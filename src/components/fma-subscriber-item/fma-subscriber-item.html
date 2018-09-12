@@ -8,27 +8,25 @@
     <div class="subscriber-profile-container">
 
       <ion-item>
-
         <div item-start [ngClass]="[ 'subscriber-avatar-container', 'fma-sub-avt-default-avatar', avatarClass ]">
         </div>
+
         <div>
           <h5>{{ subscriber.name }}</h5>
         </div>
-
       </ion-item>
       <ion-card-content>
-
         {{ subscriber.bio }}
-
       </ion-card-content>
 
       <ion-item>
-
         <ion-badge *ngFor="let service of subscriber.services" color="secondary" margin-right>{{ service }}</ion-badge>
-
       </ion-item>
 
-      <button ion-item text-capitalize text-center color="primary" (click)="onButtonTapped()">view</button>
+      <button ion-item text-capitalize text-center color="primary" (click)="onButtonTapped()">
+        <ion-icon name="eye"></ion-icon>
+        <span>view</span>
+      </button>
 
     </div>
 
