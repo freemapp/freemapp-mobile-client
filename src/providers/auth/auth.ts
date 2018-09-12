@@ -43,7 +43,6 @@ export class AuthProvider {
   }
 
   public getCreds$(): Observable<any> {
-    if (this.dev)
     return Observable.fromPromise(this.storage.get('fma_creds'));
   }
 
