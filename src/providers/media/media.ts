@@ -17,9 +17,7 @@ export class MediaProvider {
   private serviceIconsUrl: string = ENV.mediaUrls.serviceIcons;
   private avatarsUrl: string = ENV.mediaUrls.avatars;
 
-  constructor(public http: HttpClient) {
-
-  }
+  constructor(public http: HttpClient) { }
 
   public getImage(name: string): Observable<any> {
     return this.http.get(`${ this.imagesUrl }/${ name }`);
