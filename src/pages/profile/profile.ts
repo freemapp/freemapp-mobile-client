@@ -14,19 +14,11 @@ export class ProfilePage {
   public profile: any = {};
   public loading: Loading;
 
-  get coverClass(): string {
-    return `fma-sub-cvr-${ this.profile.subscriberid }`;
-  }
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController, public loader: LoadingController,
     private auth: AuthProvider, private media: MediaProvider) {
 
     this.auth.credsChanged.subscribe(creds => {
-      if (!creds)
-        this.navCtrl.setRoot(LandingPage);
-    });
-    this.auth.getCreds().then(creds => {
       if (!creds)
         this.navCtrl.setRoot(LandingPage);
     });
