@@ -22,7 +22,7 @@
     "paths": {
       "@fma_app/*": [ "src/app/*" ],
       "@fma_assets/*": [ "src/assets/*" ],
-      "@fma_env": [ "environments/environment" ],
+      "@fma_env": [ "src/environments/environment" ],
       "@fma_pages/*": [ "src/pages/*" ],
       "@fma_providers/*": [ "src/providers/*" ],
       "@fma_components/*": [ "src/components/*" ],

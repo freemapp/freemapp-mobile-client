@@ -4,9 +4,8 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>
-        <ion-badge>
-          <ion-icon icon="logo-codepen"></ion-icon>
-          dev
+        <ion-badge color="warning" item-end *ngIf="isDebug">
+          <ion-icon name="logo-codepen"></ion-icon>
         </ion-badge>
         Menu
       </ion-title>

@@ -40,7 +40,7 @@ if (env === 'prod' || env === 'dev') {
 
 function environmentPath() {
   let envExt = env === 'dev' ? '' : `.${env}`;
-  let filePath = `./environments/environment${envExt}.ts`;
+  let filePath = `./src/environments/environment${envExt}.ts`;
 
   if (!fs.existsSync(filePath)) {
     console.log(chalk.red('\n' + filePath + ' does not exist!'));

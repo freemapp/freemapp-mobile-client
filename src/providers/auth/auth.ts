@@ -43,33 +43,41 @@ export class AuthProvider {
   }
 
   public getCreds$(): Observable<any> {
+    if (ENV.isDebug) return Observable.of(JSON.parse(localStorage.getItem('fma_creds')));
     return Observable.fromPromise(this.storage.get('fma_creds'));
   }
 
   public getCreds(): Promise<any> {
+    if (ENV.isDebug) return Promise.resolve(JSON.parse(localStorage.getItem('fma_creds')));
     return this.storage.get('fma_creds');
   }
 
   private setCreds$(value: any): Observable<any> {
     this.credsChanged.next(value);
 
+    if (ENV.isDebug) return Observable.of(localStorage.setItem('fma_creds', JSON.stringify(value)));
     return Observable.fromPromise(this.storage.set('fma_creds', value));
   }
 
   private setCreds(value: any): Promise<any> {
     this.credsChanged.next(value);
 
+    if (ENV.isDebug) return Promise.resolve(localStorage.setItem('fma_creds', JSON.stringify(value)));
     return this.storage.set('fma_creds', value);
   }
 
   private clearCreds$(value: any): Observable<any> {
     this.credsChanged.next(null);
-    return Observable.fromPromise(this.storage.remove('aws_creds'));
+
+    if (ENV.isDebug) return Observable.of(localStorage.removeItem('fma_creds'));
+    return Observable.fromPromise(this.storage.remove('fma_creds'));
   }
 
   private clearCreds(value: any): Promise<any> {
     this.credsChanged.next(null);
-    return this.storage.remove('aws_creds');
+
+    if (ENV.isDebug) return Promise.resolve(localStorage.removeItem('fma_creds'));
+    return this.storage.remove('fma_creds');
   }
 
 }

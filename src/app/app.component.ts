@@ -6,7 +6,8 @@ import { LandingPage } from '@fma_pages/landing/landing';
 import { SignInPage } from '@fma_pages/sign-in/sign-in';
 import { ProfilePage } from '@fma_pages/profile/profile';
 import { AuthProvider } from '@fma_providers/auth/auth';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ENV } from '@fma_env';
 
 type MenuPage = {
   name: string,
@@ -19,8 +20,10 @@ type MenuPage = {
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
 
+  isDebug: boolean = ENV.isDebug;
   rootPage: any = LandingPage;
 
   pages: Array<MenuPage>
