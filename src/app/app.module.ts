@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from "@ionic/storage";
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import Amplify from 'aws-amplify';
 
 import { MyApp } from '@fma_app/app.component';
 import { LandingPage } from '@fma_pages/landing/landing';
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { ComponentsModule } from '@fma_components/components.module';
 import { SignInPage } from '@fma_pages/sign-in/sign-in';
 import { SignUpPage } from '@fma_pages/sign-up/sign-up';
@@ -18,7 +19,7 @@ import { ProfilePage } from '@fma_pages/profile/profile';
 import { AuthProvider } from '@fma_providers/auth/auth';
 import { DataProvider } from '@fma_providers/data/data';
 import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
-import { CommonModule } from '@angular/common';
+import { MediaProvider } from '@fma_providers/media/media';
 // import { OverlayPortal } from 'ionic-angular/umd/components/app/overlay-portal';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
     // IonicApp,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
@@ -60,7 +62,8 @@ import { CommonModule } from '@angular/common';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    DataProvider
+    DataProvider,
+    MediaProvider
   ]
 })
 export class AppModule {

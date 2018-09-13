@@ -14,9 +14,9 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item text-capitalize *ngFor="let p of (pagesObservable | async)" (click)="openPage(p.page)">
-        <ion-icon [name]="p.icon"></ion-icon>
-        <span>{{p.name}}</span>
+      <button menuClose ion-item text-capitalize *ngFor="let ma of (menuActionsObservable | async)" (click)="ma.action(ma)">
+        <ion-icon [name]="ma.icon"></ion-icon>
+        <span>{{ma.name}}</span>
       </button>
     </ion-list>
   </ion-content>

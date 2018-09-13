@@ -9,9 +9,9 @@ import { AuthProvider } from '@fma_providers/auth/auth';
 import { Observable } from 'rxjs';
 import { ENV } from '@fma_env';
 
-type MenuPage = {
+type MenuAction = {
   name: string,
-  page: any,
+  action: any,
   icon: string,
   polarity?: number
 };
@@ -23,32 +23,51 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  isDebug: boolean = ENV.isDebug;
-  rootPage: any = LandingPage;
+  isDebug: boolean;
+  rootPage: any;
 
-  pages: Array<MenuPage>
-  pagesObservable: Observable<MenuPage[]>;
+  menuActions: Array<MenuAction>
+  menuActionsObservable: Observable<MenuAction[]>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    private auth: AuthProvider) {
+    public auth: AuthProvider) {
 
-    let pages: Array<MenuPage> = [
-      { name: 'home', page: LandingPage, icon: 'md-home' },
-      { name: 'sign-in', page: SignInPage, icon: 'md-key', polarity: -1 },
-      { name: 'profile', page: ProfilePage, icon: 'md-person', polarity: 1 }];
+    let pages: Array<MenuAction> = [{
+        name: 'home',
+        action: () => this.openPage(LandingPage),
+        icon: 'md-home'
+      }, {
+        name: 'sign-in',
+        action: () => this.openPage(SignInPage),
+        icon: 'md-key',
+        polarity: -1
+      }, {
+        name: 'profile',
+        action: () => this.openPage(ProfilePage),
+        icon: 'md-person',
+        polarity: 1
+      }, {
+        name: 'sign-out',
+        action: () => this.auth.signOut(),
+        icon: 'md-person',
+        polarity: 1
+      }];
 
-    this.pages = pages;
-    this.pagesObservable = Observable.of(pages);
+    this.menuActions = pages;
+    this.menuActionsObservable = Observable.of(pages);
 
     this.auth.credsChanged.subscribe(creds => this.filterPages(creds));
     this.auth.getCreds().then(creds => this.filterPages(creds));
+
+    this.isDebug = ENV.isDebug;
+    this.rootPage = LandingPage;
 
     this.initializeApp();
   }
 
   filterPages(creds?: any): void {
-    let visiblePages: MenuPage[] = this.pages.filter((page: MenuPage) => {
-      let polarity: number = page.polarity;
+    let visiblePages: MenuAction[] = this.menuActions.filter((menuAction: MenuAction) => {
+      let polarity: number = menuAction.polarity;
       let repulsive: boolean = polarity < 0;
       let attractive: boolean = polarity > 0;
 
@@ -62,7 +81,7 @@ export class MyApp {
         return true;
     });
 
-    this.pagesObservable = Observable.of(visiblePages);
+    this.menuActionsObservable = Observable.of(visiblePages);
   }
 
   initializeApp() {
@@ -74,8 +93,16 @@ export class MyApp {
     });
   }
 
-  openPage(page: any) {
+  getMenuAction(menuAction: MenuAction): any {
+    if (typeof menuAction.action === 'function')
+      return menuAction.action();
+
+    else
+      return this.openPage(menuAction.action);
+  }
+
+  openPage(page: any): Promise<any> {
     // if (this.nav.root !== page)
-      this.nav.setRoot(page);
+      return this.nav.setRoot(page);
   }
 }
