@@ -34,13 +34,21 @@ export class DataProvider {
   }
 
   getSubscriber(subscriberid: string): Observable<any> {
-    let subscriberPromise = API.get('subscribers', `/${ subscriberid }`, { response: false });
+    let subscriberPromise = API.get('subscribers', `/${subscriberid}`, { response: false });
 
     return Observable.fromPromise(subscriberPromise);
   }
 
   updateSubscriber(subscriberid: string, subscriber: any): Promise<any> {
-    return API.put('subscribers', `/${ subscriberid }`, subscriber);
+    let apiParameters = { // OPTIONAL
+      headers: {
+        'content-type': 'application/json'
+      },
+      response: true,
+      body: subscriber
+    };
+
+    return API.put('subscribers', `/${subscriberid}`, apiParameters);
   }
 
   getServices(filter?: any): Observable<any> {
@@ -50,7 +58,7 @@ export class DataProvider {
   }
 
   getService(name: string): Observable<any> {
-    let servicePromise = API.get('services', `/${ name }`, { response: false });
+    let servicePromise = API.get('services', `/${name}`, { response: false });
 
     return Observable.fromPromise(servicePromise);
   }
