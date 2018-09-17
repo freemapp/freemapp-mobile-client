@@ -20,7 +20,6 @@ import { AuthProvider } from '@fma_providers/auth/auth';
 import { DataProvider } from '@fma_providers/data/data';
 import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
 import { MediaProvider } from '@fma_providers/media/media';
-// import { OverlayPortal } from 'ionic-angular/umd/components/app/overlay-portal';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,7 @@ import { MediaProvider } from '@fma_providers/media/media';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__freemapp_mobile',
-        driverOrder: ['localstorage']//['indexeddb', 'sqlite', 'websql']
+      driverOrder: ['localstorage']//['indexeddb', 'sqlite', 'websql']
     }),
     // OverlayPortal,
     ComponentsModule
@@ -60,7 +59,7 @@ import { MediaProvider } from '@fma_providers/media/media';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
     DataProvider,
     MediaProvider

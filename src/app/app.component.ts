@@ -35,21 +35,21 @@ export class MyApp {
     let pages: Array<MenuAction> = [{
         name: 'home',
         action: () => this.openPage(LandingPage),
-        icon: 'md-home'
+        icon: 'home'
       }, {
         name: 'sign-in',
         action: () => this.openPage(SignInPage),
-        icon: 'md-key',
+        icon: 'log-in',
         polarity: -1
       }, {
         name: 'profile',
         action: () => this.openPage(ProfilePage),
-        icon: 'md-person',
+        icon: 'person',
         polarity: 1
       }, {
         name: 'sign-out',
         action: () => this.auth.signOut(),
-        icon: 'md-person',
+        icon: 'log-out',
         polarity: 1
       }];
 

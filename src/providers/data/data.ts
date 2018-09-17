@@ -39,6 +39,10 @@ export class DataProvider {
     return Observable.fromPromise(subscriberPromise);
   }
 
+  updateSubscriber(subscriberid: string, subscriber: any): Promise<any> {
+    return API.put('subscribers', `/${ subscriberid }`, subscriber);
+  }
+
   getServices(filter?: any): Observable<any> {
     let servicesPromise = API.get('services', `/`, { response: false, queryStringParameters: { filter } });
 

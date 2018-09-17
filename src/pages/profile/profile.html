@@ -1,18 +1,21 @@
 
 <ion-content>
 
-  <!-- <fma-app-heading></fma-app-heading> -->
-  <!-- <div item-start [ngClass]="[ 'subscriber-avatar-container', 'fma-sub-avt-default-avatar', avatarClass ]"></div> -->
-  <!-- <div [ngClass]="[ 'subscriber-item-container', coverClass ]"></div> -->
-  <img [src]="media.getImage(profile.cover) | async" alt="profile cover" />
+  <!-- <img [src]="`${ ENV.mediaUrls.images }/${ profile.cover }`" alt="profile cover" /> -->
+  <!-- <img src="https://dmta9u5mzoog.cloudfront.net/large-m-cloud.png" alt="profile cover" /> -->
+  <!-- <img [src]="media.getImage(profile.cover) | async" alt="profile cover" /> -->
+  <img [src]="media.getImageUrl(profile.cover)" alt="profile cover" />
 
   <ion-item>
 
     <ion-avatar item-start>
 
-      <img src="assets/imgs/default-avatar.jpg" alt="avatar" />
+      <img [src]="media.getAvatarUrl(profile.avatar)" alt="avatar" />
 
     </ion-avatar>
+
+    <ion-label stacked text-capitalize>name</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.name"></ion-input>
 
   </ion-item>
 
@@ -25,13 +28,6 @@
 
   <ion-item>
 
-    <ion-label stacked text-capitalize>name</ion-label>
-    <ion-input type="text" [(ngModel)]="profile.name"></ion-input>
-
-  </ion-item>
-
-  <ion-item>
-
     <ion-label stacked text-capitalize>bio</ion-label>
     <ion-textarea type="text" [(ngModel)]="profile.bio"></ion-textarea>
 
@@ -39,9 +35,17 @@
 
   <ion-item>
 
-    <ion-label stacked text-capitalize>services</ion-label>
-    <ion-input type="text" [(ngModel)]="profile.services"></ion-input>
+    <!-- <ion-label stacked text-capitalize>services</ion-label> -->
+    <!-- {{ service }} -->
+    <!-- <ion-badge color="secondary" margin-right>service</ion-badge> -->
+    <ion-badge *ngFor="let service of profile.services" color="secondary" margin-right>{{ service }}</ion-badge>
+    <!-- <ion-input type="text" [(ngModel)]="profile.services"></ion-input> -->
 
   </ion-item>
+
+  <button ion-button text-capitalize text-center text-capitalize margin-top full color="primary" (click)="update()">
+    <ion-icon name="save"></ion-icon>
+    <span>update</span>
+  </button>
 
 </ion-content>

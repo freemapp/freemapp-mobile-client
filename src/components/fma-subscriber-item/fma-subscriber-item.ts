@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MediaProvider } from '@fma_providers/media/media';
 
 /**
  * Generated class for the FmaSubscriberItemComponent component.
@@ -28,7 +29,7 @@ export class FmaSubscriberItemComponent {
     return `fma-sub-avt-${ this.subscriber.subscriberid }`;
   }
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private media: MediaProvider) {
     this.buttonTappedEmitter = new EventEmitter<any>();
   }
 

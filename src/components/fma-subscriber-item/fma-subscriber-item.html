@@ -1,23 +1,29 @@
-<ion-card full (click)="onButtonTapped()">
-
+<!-- <ion-card full (click)="onButtonTapped()"> -->
+<ion-card full>
   <!-- <img [src]="avatar" alt="avatar" /> -->
   <!-- <img src="./assets/imgs/default-avatar.jpg" alt="avatar" /> -->
 
-  <div [ngClass]="[ 'subscriber-item-container', coverClass ]">
-
-    <div class="subscriber-profile-container">
-
+  <!-- <div [ngClass]="[ 'subscriber-item-container', coverClass ]"> -->
+    <ion-list>
+    <!-- <div class="subscriber-profile-container"> -->
       <ion-item>
-        <div item-start [ngClass]="[ 'subscriber-avatar-container', 'fma-sub-avt-default-avatar', avatarClass ]">
-        </div>
+        <!-- <div item-start [ngClass]="[ 'subscriber-avatar-container', 'fma-sub-avt-default-avatar', avatarClass ]"
+        </div> -->
 
-        <div>
+        <ion-avatar item-start>
+          <img [src]="media.getAvatarUrl(subscriber.avatar)" alt="avatar" />
+        </ion-avatar>
+
+        <h2>{{ subscriber.name }}</h2>
+
+        <!-- <div>
           <h5>{{ subscriber.name }}</h5>
-        </div>
+        </div> -->
       </ion-item>
-      <ion-card-content>
+
+      <!-- <ion-card-content>
         {{ subscriber.bio }}
-      </ion-card-content>
+      </ion-card-content> -->
 
       <ion-item>
         <ion-badge *ngFor="let service of subscriber.services" color="secondary" margin-right>{{ service }}</ion-badge>
@@ -27,9 +33,7 @@
         <ion-icon name="eye"></ion-icon>
         <span>view</span>
       </button>
-
-    </div>
-
-  </div>
-
+    <!-- </div> -->
+    </ion-list>
+  <!-- </div> -->
 </ion-card>

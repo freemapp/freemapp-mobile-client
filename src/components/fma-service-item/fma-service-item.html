@@ -1,7 +1,14 @@
 
 <!-- <button ion-button class="fma-service-button" color="secondary"> -->
-<div (click)="onTapped()">
-  <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div>
+<div class="fma-service-button" (click)="onTapped()">
+  <div class="fma-service-icon" [ngStyle]="{ 'background-image': 'url(' + media.getServiceIconUrl(service.icon) + ')' }"></div>
+  <!-- <div class="fma-service-icon" [style.background-image]="media.getServiceIconUrl(service.icon)"></div> -->
+  <!-- <div [ngClass]="[ 'fma-service-icon', iconClass ]"></div> -->
+  <!-- <img [src]="media.getServiceIconUrl(service.icon)" alt="service icon" class="fma-service-icon" /> -->
+  <!-- <ion-avatar item-start>
+    <img [src]="media.getServiceIconUrl(service.icon)" alt="service icon" class="fma-service-icon" />
+  </ion-avatar> -->
+
   <div class="fma-service-label" text-capitalize>
 
     {{ service.name }}

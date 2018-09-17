@@ -3,6 +3,8 @@ import { NavController, NavParams, ToastController, LoadingController, Loading }
 import { AuthProvider } from '@fma_providers/auth/auth';
 import { MediaProvider } from '@fma_providers/media/media';
 import { LandingPage } from '@fma_pages/landing/landing';
+import { ENV } from '@fma_env';
+import { DataProvider } from '@fma_providers/data/data';
 
 @Component({
   selector: 'page-profile',
@@ -16,7 +18,7 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController, public loader: LoadingController,
-    private auth: AuthProvider, private media: MediaProvider) {
+    private auth: AuthProvider, private data: DataProvider, private media: MediaProvider) {
 
     this.auth.credsChanged.subscribe(creds => {
       if (!creds)
@@ -51,6 +53,32 @@ export class ProfilePage {
     }).present();
 
     this.loading.dismiss();
+  }
+
+  update(): void {
+    this.loading = this.loader.create({
+      content: 'Updating profile...',
+      dismissOnPageChange: true
+    });
+    this.loading.present();
+
+    this.data.updateSubscriber(this.profile.subscriberid, this.profile)
+      .then(result => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: 'Profile updated',
+          showCloseButton: true
+        }).present();
+        this.loading.dismiss();
+      })
+      .catch(error => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: error,
+          showCloseButton: true
+        }).present();
+        this.loading.dismiss();
+      });
   }
 
 }

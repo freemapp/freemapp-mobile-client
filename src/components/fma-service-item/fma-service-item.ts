@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MediaProvider } from '@fma_providers/media/media';
 
 /**
  * Generated class for the FmaServiceItemComponent component.
@@ -27,7 +28,7 @@ export class FmaServiceItemComponent {
     return `fma-svc-icn-${ this.service.icon }`;
   }
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private media: MediaProvider) {
     this.tappedEmitter = new EventEmitter<any>();
   }
 
