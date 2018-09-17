@@ -36,13 +36,11 @@ import { MediaProvider } from '@fma_providers/media/media';
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    // IonicApp,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__freemapp_mobile',
       driverOrder: ['localstorage']//['indexeddb', 'sqlite', 'websql']
     }),
-    // OverlayPortal,
     ComponentsModule
   ],
   bootstrap: [IonicApp],

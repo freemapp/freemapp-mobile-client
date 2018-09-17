@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController, Loading, ModalController } from 'ionic-angular';
 import { AuthProvider } from '@fma_providers/auth/auth';
 import { MediaProvider } from '@fma_providers/media/media';
 import { LandingPage } from '@fma_pages/landing/landing';
 import { ENV } from '@fma_env';
 import { DataProvider } from '@fma_providers/data/data';
+import { FmaAvatarEditorComponent } from '@fma_components/fma-avatar-editor/fma-avatar-editor';
 
 @Component({
   selector: 'page-profile',
@@ -18,6 +19,7 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController, public loader: LoadingController,
+    public modalCtrl: ModalController,
     private auth: AuthProvider, private data: DataProvider, private media: MediaProvider) {
 
     this.auth.credsChanged.subscribe(creds => {
@@ -55,12 +57,23 @@ export class ProfilePage {
     this.loading.dismiss();
   }
 
+  promptAvatar(): void {
+    this.navCtrl.push(FmaAvatarEditorComponent, { avatar: this.profile.avatar })
+    // this.modalCtrl.create(FmaAvatarEditorComponent, { avatar: this.profile.avatar }, {
+    //   enableBackdropDismiss: true,
+    //   showBackdrop: true
+    // }).present();
+  }
+
   update(): void {
     this.loading = this.loader.create({
       content: 'Updating profile...',
       dismissOnPageChange: true
     });
     this.loading.present();
+
+    if (!this.profile.avatar) this.profile.avatar = 'cat.jpg';
+    if (!this.profile.cover) this.profile.cover = 'dog.jpg';
 
     this.data.updateSubscriber(this.profile.subscriberid, this.profile)
       .then(result => {
