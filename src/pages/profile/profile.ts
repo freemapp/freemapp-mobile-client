@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ToastController, LoadingController, Loading, ModalController } from 'ionic-angular';
 import { AuthProvider } from '@fma_providers/auth/auth';
 import { MediaProvider } from '@fma_providers/media/media';
@@ -6,6 +6,7 @@ import { LandingPage } from '@fma_pages/landing/landing';
 import { ENV } from '@fma_env';
 import { DataProvider } from '@fma_providers/data/data';
 import { FmaAvatarEditorComponent } from '@fma_components/fma-avatar-editor/fma-avatar-editor';
+import { ImagePicker, OutputType } from '@ionic-native/image-picker';
 
 @Component({
   selector: 'page-profile',
@@ -17,10 +18,14 @@ export class ProfilePage {
   public profile: any = {};
   public loading: Loading;
 
+  @ViewChild('avatarImg') avatarImg: ElementRef;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController, public loader: LoadingController,
     public modalCtrl: ModalController,
-    private auth: AuthProvider, private data: DataProvider, private media: MediaProvider) {
+    private auth: AuthProvider, private data: DataProvider,
+    private media: MediaProvider,
+    private imagePicker: ImagePicker) {
 
     this.auth.credsChanged.subscribe(creds => {
       if (!creds)
@@ -58,11 +63,26 @@ export class ProfilePage {
   }
 
   promptAvatar(): void {
-    this.navCtrl.push(FmaAvatarEditorComponent, { avatar: this.profile.avatar })
+    // this.navCtrl.push(FmaAvatarEditorComponent, { avatar: this.profile.avatar })
     // this.modalCtrl.create(FmaAvatarEditorComponent, { avatar: this.profile.avatar }, {
     //   enableBackdropDismiss: true,
     //   showBackdrop: true
     // }).present();
+    console.log('avatar clicked');
+
+    this.imagePicker.getPictures({
+      maximumImagesCount: 1,
+      outputType: OutputType.DATA_URL
+    }).then(results => this.refreshAvatar(results));
+  }
+
+  refreshAvatar(avatarData: string): Promise<any> {
+    // Consider specifying characterset?
+    // this.avatarImg.nativeElement.src = avatarData;
+    this.profile.avatarUpdated = true;
+    this.profile.avatar = avatarData;
+
+    return Promise.resolve();
   }
 
   update(): void {

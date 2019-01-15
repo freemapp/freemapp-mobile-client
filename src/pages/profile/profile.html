@@ -4,16 +4,34 @@
   <!-- <img [src]="`${ ENV.mediaUrls.images }/${ profile.cover }`" alt="profile cover" /> -->
   <!-- <img src="https://dmta9u5mzoog.cloudfront.net/large-m-cloud.png" alt="profile cover" /> -->
   <!-- <img [src]="media.getImage(profile.cover) | async" alt="profile cover" /> -->
-  <img [src]="media.getImageUrl(profile.cover)" alt="profile cover" />
+  <!-- <img [src]="media.getImageUrl(profile.cover)" alt="profile cover" /> -->
 
-  <ion-item>
+  <div style="position: relative;">
 
-    <ion-avatar item-start (click)="promptAvatar()">
+    <img [src]="media.getImageUrl(profile.cover)" alt="profile cover" />
+    <img #avatarImg style="width: 64px; height: 64px; position: absolute; left: 15px; bottom: 15px;" alt="avatar"
+      (click)="promptAvatar()" [src]="profile.avatarUpdated ? profile.avatar : media.getAvatarUrl(profile.avatar)" />
 
-      <ion-icon name="brush" class="avatar-edit"></ion-icon>
+  </div>
+
+  <!-- <ion-item> -->
+
+    <!-- <ion-avatar item-start>
+
       <img [src]="media.getAvatarUrl(profile.avatar)" alt="avatar" />
 
-    </ion-avatar>
+    </ion-avatar> -->
+
+    <!-- <button (click)="promptAvatar()">
+      <ion-icon name="brush" class="avatar-edit"></ion-icon>
+    </button> -->
+
+    <!-- <ion-label  text-capitalize>name</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.name"></ion-input> -->
+
+  <!-- </ion-item> -->
+
+  <ion-item>
 
     <ion-label stacked text-capitalize>name</ion-label>
     <ion-input type="text" [(ngModel)]="profile.name"></ion-input>
@@ -48,5 +66,7 @@
     <ion-icon name="save"></ion-icon>
     <span>update</span>
   </button>
+
+  <!-- <fma-avatar-editor></fma-avatar-editor> -->
 
 </ion-content>
