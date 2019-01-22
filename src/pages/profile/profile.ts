@@ -68,7 +68,6 @@ export class ProfilePage {
     //   enableBackdropDismiss: true,
     //   showBackdrop: true
     // }).present();
-    console.log('avatar clicked');
 
     this.imagePicker.getPictures({
       maximumImagesCount: 1,
@@ -96,6 +95,7 @@ export class ProfilePage {
     if (!this.profile.cover) this.profile.cover = 'dog.jpg';
 
     this.data.updateSubscriber(this.profile.subscriberid, this.profile)
+      .then(result => this.media.updateAvatar(this.profile.subscriberid, this.profile.avatar))
       .then(result => {
         this.toastCtrl.create({
           dismissOnPageChange: true,

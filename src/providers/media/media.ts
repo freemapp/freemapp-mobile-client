@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API } from "aws-amplify";
 import { ENV } from '@fma_env';
 
 /*
@@ -70,16 +71,30 @@ export class MediaProvider {
     return this.http.get(`${ ENV.mediaUrls.serviceIcons }/${ name }`);
   }
 
-  public getAvatarUrl(name: string): string {
+  public getAvatarUrl(id: string): string {
     if (!!name)
-      return `${ ENV.mediaUrls.avatars }/${ name }`;
+      return `${ ENV.mediaUrls.avatars }/${ id }`;
 
     else
-      return `${ ENV.mediaUrls.avatars }/DefaultUserIcon.png`;
+      return `${ ENV.mediaUrls.avatars }/DefaultAvatar.png`;
+  }
+
+  public getCoverUrl(id: string): string {
+    if (!!name)
+      return `${ ENV.mediaUrls.covers }/${ id }`;
+
+    else
+      return `${ ENV.mediaUrls.covers }/DefaultCover.png`;
   }
 
   public getAvatar(name: string): Observable<any> {
+
+
     return this.http.get(`${ ENV.mediaUrls.avatars }/${ name }`);
+  }
+
+  public updateAvatar(id: string, avatarData: string): Promise<any> {
+    return this.http.put(`${ ENV.mediaUrls.avatars }/${ id }`, avatarData, {  }).toPromise();
   }
 
   private getFileName(name: string): string {

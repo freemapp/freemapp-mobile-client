@@ -13,15 +13,17 @@ import { NavParams, NavController, ViewController } from 'ionic-angular';
 })
 export class FmaAvatarEditorComponent {
 
-  avatar: string;
+  text: string;
+  // avatar: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController) {
-    this.avatar = navParams.get('avatar');
+      this.text = 'fma-avatar-editor';
+    // this.avatar = navParams.get('avatar');
   }
 
   dismiss(): void {
-    this.viewCtrl.dismiss(this.avatar);
+    // this.viewCtrl.dismiss(this.avatar);
   }
 
 }
