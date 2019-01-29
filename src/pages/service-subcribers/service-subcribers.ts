@@ -29,19 +29,19 @@ export class ServiceSubcribersPage {
 
     let service = this.navParams.data.service;
 
-    this.dataSvc.getSubscribers({ svc: service.name }).subscribe(
-        result => {
+    this.dataSvc.getSubscribers({ svc: service.name })
+      .then(result => {
           this.subscribers = result;
 
           this.loading.dismiss();
-        },
-        error => {
-          this.toastCtrl.create({
-            dismissOnPageChange: true,
-            message: error,
-            showCloseButton: true
-          })
-        });
+      })
+      .catch(error => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: error,
+          showCloseButton: true
+        })
+      });
   }
 
   onItemButtonTapped(subscriber) {

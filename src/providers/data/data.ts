@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { API } from "aws-amplify";
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ENV } from '@fma_env';
 
 /*
   Generated class for the DataProvider provider.
@@ -11,56 +11,47 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class DataProvider {
 
-  constructor() {
+  constructor(public http: HttpClient) {
   }
 
-  searchSubscribers(criteria?: string): Observable<any> {
+  searchSubscribers(criteria?: string): Promise<any> {
     let filter = {
       search: criteria
     };
 
-    let subscribersPromise = API.get('subscribers', `/`, { response: false, queryStringParameters: filter });
-
-    return Observable.fromPromise(subscribersPromise);
+    return this.http.get(`${ ENV.dataUrls.subscribers }`, { params: filter }).toPromise();
   }
 
-  getSubscribers(filter?: any): Observable<any> {
+  getSubscribers(filter?: any): Promise<any> {
     filter = filter || {};
     filter.svc = filter.svc || '*';
 
-    let subscribersPromise = API.get('subscribers', `/`, { response: false, queryStringParameters: filter });
-
-    return Observable.fromPromise(subscribersPromise);
+    return this.http.get(`${ ENV.dataUrls.subscribers }`, { params: filter }).toPromise();
   }
 
-  getSubscriber(subscriberid: string): Observable<any> {
-    let subscriberPromise = API.get('subscribers', `/${subscriberid}`, { response: false });
-
-    return Observable.fromPromise(subscriberPromise);
+  getSubscriber(subscriberid: string): Promise<any> {
+     return this.http.get(`${ ENV.dataUrls.subscribers }/${ subscriberid }`).toPromise();
   }
 
-  updateSubscriber(subscriberid: string, subscriber: any): Promise<any> {
+  updateSubscriber(subscriber: any): Promise<any> {
+    delete subscriber.avatarData;
+
     let apiParameters = { // OPTIONAL
       headers: {
         'content-type': 'application/json'
       },
-      response: true,
-      body: subscriber
+      response: true
     };
 
-    return API.put('subscribers', `/${subscriberid}`, apiParameters);
+    return this.http.put(`${ ENV.dataUrls.subscribers }/${ subscriber.subscriberid }`, subscriber, apiParameters).toPromise();
   }
 
-  getServices(filter?: any): Observable<any> {
-    let servicesPromise = API.get('services', `/`, { response: false, queryStringParameters: { filter } });
-
-    return Observable.fromPromise(servicesPromise);
+  getServices(filter?: any): Promise<any> {
+    return this.http.get(`${ ENV.dataUrls.services }`, { params: filter }).toPromise();
   }
 
-  getService(name: string): Observable<any> {
-    let servicePromise = API.get('services', `/${name}`, { response: false });
-
-    return Observable.fromPromise(servicePromise);
+  getService(name: string): Promise<any> {
+    return this.http.get(`${ ENV.dataUrls.services }/${ name }`).toPromise();
   }
 
 }

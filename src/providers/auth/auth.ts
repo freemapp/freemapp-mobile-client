@@ -23,7 +23,7 @@ export class AuthProvider {
   public signIn(email: string, password: string): Promise<any> {
     return Auth.signIn(email, password)
       .then((authenticationCreds: any) => {
-        return this.dataSvc.getSubscriber(authenticationCreds.username).toPromise()
+        return this.dataSvc.getSubscriber(authenticationCreds.username)
           .then((subscriber: any) => {
             let newCreds: any = {
               username: authenticationCreds.username,
