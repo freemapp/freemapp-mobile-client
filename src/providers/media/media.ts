@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API } from "aws-amplify";
+import * as jssha from 'jssha';
 import { ENV } from '@fma_env';
 
 /*
@@ -71,30 +71,30 @@ export class MediaProvider {
     return this.http.get(`${ ENV.mediaUrls.serviceIcons }/${ name }`);
   }
 
-  public getAvatarUrl(id: string): string {
-    if (!!name)
-      return `${ ENV.mediaUrls.avatars }/${ id }`;
+  public getAvatarUrl(profile: any): string {
+    if (!!profile.avatar)
+      return `${ ENV.mediaUrls.avatars }/${ profile.subscriberid }/${ profile.avatar }`;
 
     else
-      return `${ ENV.mediaUrls.avatars }/DefaultAvatar.png`;
+      return `${ ENV.mediaUrls.avatars }/eeb36ae0-c15d-49ce-99f4-9bcfdad26aef`;
   }
 
-  public getCoverUrl(id: string): string {
-    if (!!name)
-      return `${ ENV.mediaUrls.covers }/${ id }`;
+  public getCoverUrl(profile: any): string {
+    if (!!profile.cover)
+      return `${ ENV.mediaUrls.covers }/${ profile.subscriberid }/${ profile.cover }`;
 
     else
       return `${ ENV.mediaUrls.covers }/DefaultCover.png`;
   }
 
-  public getAvatar(name: string): Observable<any> {
+  public updateAvatar(profile: any): Promise<any> {
+    const options = {
+      headers: {
+        'x-amz-content-sha256': this.hashBody(profile.avatarData)
+      }
+    };
 
-
-    return this.http.get(`${ ENV.mediaUrls.avatars }/${ name }`);
-  }
-
-  public updateAvatar(id: string, avatarData: string): Promise<any> {
-    return this.http.put(`${ ENV.mediaUrls.avatars }/${ id }`, avatarData, {  }).toPromise();
+    return this.http.put(`${ ENV.mediaUrls.avatars }/${ profile.subscriberid }/${ profile.avatar }`, profile.avatarData, options).toPromise();
   }
 
   private getFileName(name: string): string {
@@ -113,6 +113,13 @@ export class MediaProvider {
       host: urlMatches[2],
       path: urlMatches[3]
     };
+  }
+
+  private hashBody(body: any): string {
+    const sha = new jssha('SHA-256', 'TEXT');
+    sha.update(body);
+
+    return sha.getHash('HEX');
   }
 
 }

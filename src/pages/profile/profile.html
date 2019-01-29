@@ -8,9 +8,9 @@
 
   <div style="position: relative;">
 
-    <img [src]="media.getCoverUrl(profile.subscriberid)" alt="profile cover" />
+    <img [src]="media.getCoverUrl(profile)" alt="profile cover" />
     <img #avatarImg style="width: 64px; height: 64px; position: absolute; left: 15px; bottom: 15px;" alt="avatar"
-      (click)="promptAvatar()" [src]="profile.avatarUpdated ? profile.avatar : media.getAvatarUrl(profile.subscriberid)" />
+      (click)="promptAvatar()" [src]="!!profile.avatarData ? profile.avatarData : media.getAvatarUrl(profile)" />
 
   </div>
 

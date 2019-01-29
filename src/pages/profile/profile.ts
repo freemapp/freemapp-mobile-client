@@ -7,6 +7,7 @@ import { ENV } from '@fma_env';
 import { DataProvider } from '@fma_providers/data/data';
 import { FmaAvatarEditorComponent } from '@fma_components/fma-avatar-editor/fma-avatar-editor';
 import { ImagePicker, OutputType } from '@ionic-native/image-picker';
+import * as uuid from 'uuid'
 
 @Component({
   selector: 'page-profile',
@@ -78,8 +79,8 @@ export class ProfilePage {
   refreshAvatar(avatarData: string): Promise<any> {
     // Consider specifying characterset?
     // this.avatarImg.nativeElement.src = avatarData;
-    this.profile.avatarUpdated = true;
-    this.profile.avatar = avatarData;
+    this.profile.avatar = uuid();
+    this.profile.avatarData = avatarData;
 
     return Promise.resolve();
   }
@@ -91,11 +92,8 @@ export class ProfilePage {
     });
     this.loading.present();
 
-    if (!this.profile.avatar) this.profile.avatar = 'cat.jpg';
-    if (!this.profile.cover) this.profile.cover = 'dog.jpg';
-
-    this.data.updateSubscriber(this.profile.subscriberid, this.profile)
-      .then(result => this.media.updateAvatar(this.profile.subscriberid, this.profile.avatar))
+    this.media.updateAvatar(this.profile)
+      .then(result => this.data.updateSubscriber(this.profile))
       .then(result => {
         this.toastCtrl.create({
           dismissOnPageChange: true,

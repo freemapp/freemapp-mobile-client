@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {},
+  "dependencies": {
+    "jssha": "registry:dt/jssha#0.0.0+20160620211513"
+  }
+}
