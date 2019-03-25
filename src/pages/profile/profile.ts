@@ -7,7 +7,6 @@ import { ENV } from '@fma_env';
 import { DataProvider } from '@fma_providers/data/data';
 import { FmaAvatarEditorComponent } from '@fma_components/fma-avatar-editor/fma-avatar-editor';
 import { ImagePicker, OutputType } from '@ionic-native/image-picker';
-import * as uuid from 'uuid'
 
 @Component({
   selector: 'page-profile',
@@ -42,9 +41,25 @@ export class ProfilePage {
     });
     this.loading.present();
 
-    this.auth.getCreds().then(
-      (creds: any) => this.populateProfile(creds.subscriber),
-      (reason: any) => this.handleReject(reason));
+    this.auth.getCreds()
+      .then((creds: any) => {
+        var profile = creds.subscriber;
+
+        this.media.getAvatar(profile)
+          .then(response => {
+            // profile.avatarData = response;
+
+            // return this.populateProfile(profile);
+
+            var result = response;
+          })
+          .catch(error => {
+            var message = error;
+          });
+
+        return this.populateProfile(profile);
+      })
+      .catch((reason: any) => this.handleReject(reason));
   }
 
   populateProfile(result: any): void {
@@ -70,17 +85,26 @@ export class ProfilePage {
     //   showBackdrop: true
     // }).present();
 
-    this.imagePicker.getPictures({
+    var options = {
       maximumImagesCount: 1,
       outputType: OutputType.DATA_URL
-    }).then(results => this.refreshAvatar(results));
+    };
+
+    this.imagePicker.getPictures(options)
+      .then(results => this.refreshAvatar(results))
+      .catch(error => {
+        this.toastCtrl.create({
+          dismissOnPageChange: true,
+          message: error,
+          showCloseButton: true
+        }).present();
+      });
   }
 
-  refreshAvatar(avatarData: string): Promise<any> {
+  refreshAvatar(result: any): Promise<any> {
     // Consider specifying characterset?
     // this.avatarImg.nativeElement.src = avatarData;
-    this.profile.avatar = uuid();
-    this.profile.avatarData = avatarData;
+    this.profile.avatarData = result.data;
 
     return Promise.resolve();
   }

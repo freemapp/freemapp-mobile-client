@@ -21,7 +21,48 @@ import { DataProvider } from '@fma_providers/data/data';
 import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
 import { MediaProvider } from '@fma_providers/media/media';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { ImagePickerMock } from '@ionic-native-mocks/image-picker';
+import { ENV } from '@fma_env';
+
+class ImagePickerMock extends ImagePicker {
+
+  getPictures(options) {
+    if (ENV.isDebug)
+      return this.loadFile();
+
+    else
+      return this.getPictures(options);
+  }
+
+  loadFile(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = () => {
+        var result = {
+          mime: xhr.response.type,
+          size: xhr.response.size
+        };
+        var reader = new FileReader();
+        reader.onload = () => {
+          result['data'] = reader.result;
+
+          resolve(result);
+        };
+        reader.onerror = () => {
+          result['error'] = reader.error;
+
+          reject(result);
+        };
+        // reader.readAsDataURL(xhr.response); // base64
+        reader.readAsBinaryString(xhr.response); // raw
+        // reader.readAsText(xhr.response, 'ansi'); // raw
+      };
+      xhr.open('GET', '../assets/imgs/icon.png');
+      xhr.send();
+    });
+  }
+
+}
 
 @NgModule({
   declarations: [
