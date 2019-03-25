@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jssha from 'jssha';
+import * as uuid from 'uuid'
 import { ENV } from '@fma_env';
 
 /*
@@ -79,6 +80,18 @@ export class MediaProvider {
       return `${ ENV.mediaUrls.avatars }/eeb36ae0-c15d-49ce-99f4-9bcfdad26aef`;
   }
 
+  public getAvatar(profile: any): any {
+    var options = { headers: {
+      'Origin': 'http://localhost:8100',
+      'Host': this.getUrlParts(ENV.mediaUrls.avatars).host,
+      'cache-control': 'no-cache'
+    } };
+
+    return this.http.get(`${ ENV.mediaUrls.avatars }/${ profile.subscriberid }/${ profile.avatar }`, options)
+      .toPromise()
+      .then(response => Promise.resolve(response));
+  }
+
   public getCoverUrl(profile: any): string {
     if (!!profile.cover)
       return `${ ENV.mediaUrls.covers }/${ profile.subscriberid }/${ profile.cover }`;
@@ -88,9 +101,20 @@ export class MediaProvider {
   }
 
   public updateAvatar(profile: any): Promise<any> {
+    var match = profile.avatarData.match('data:image/([a-z]*)');
+    var mime = match[0];
+    var extention = match[1];
+
+    if (!!extention)
+      profile.avatar = `${ uuid() }.${ extention }`;
+
+    else
+      profile.avatar = uuid();
+
     const options = {
       headers: {
-        'x-amz-content-sha256': this.hashBody(profile.avatarData)
+        'x-amz-content-sha256': this.hashBody(profile.avatarData),
+        'content-type': mime
       }
     };
 

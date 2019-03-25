@@ -46,7 +46,6 @@
         "zone.js": "0.8.26"
     },
     "devDependencies": {
-        "@ionic-native-mocks/image-picker": "^2.0.12",
         "@ionic/app-scripts": "^3.2.0",
         "@types/node": "^10.5.4",
         "@types/uuid": "^3.4.4",
