@@ -17,7 +17,7 @@ import { ResetPage } from '@fma_pages/reset/reset';
 import { ActivatePage } from '@fma_pages/activate/activate';
 import { ProfilePage } from '@fma_pages/profile/profile';
 import { AuthProvider } from '@fma_providers/auth/auth';
-import { DataProvider } from '@fma_providers/data/data';
+import { APIGatewayProvider } from '@fma_providers/api-gateway/api-gateway';
 import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
 import { MediaProvider } from '@fma_providers/media/media';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -103,7 +103,7 @@ class ImagePickerMock extends ImagePicker {
     { provide: ImagePicker, useClass: ImagePickerMock },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
-    DataProvider,
+    APIGatewayProvider,
     MediaProvider
   ]
 })

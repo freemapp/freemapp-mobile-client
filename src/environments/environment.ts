@@ -9,6 +9,7 @@ export const ENV = {
     covers: 'https://d1iugcxvqzee9a.cloudfront.net'
   },
   dataUrls: {
+    auth: '',
     subscribers: 'https://dbep3uy1fc.execute-api.us-east-2.amazonaws.com/dev',
     services: 'https://brblt7abh0.execute-api.us-east-2.amazonaws.com/dev'
   }

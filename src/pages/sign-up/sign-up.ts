@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { Auth } from 'aws-amplify';
 import { ActivatePage } from '@fma_pages/activate/activate';
+import { Auth } from 'aws-amplify';
 
 /**
  * Generated class for the SignUpPage page.
@@ -27,18 +27,15 @@ export class SignUpPage
       if (navParams.data.email) this.email = navParams.data.email;
     }
 
-  ionViewDidLoad()
-  {
+  ionViewDidLoad() {
 
   }
 
-  cancel()
-  {
+  cancel() {
     this.navCtrl.pop();
   }
 
-  signUp()
-  {
+  signUp() {
     this.loading = this.loader.create({
       content: 'Signing up...',
       dismissOnPageChange: true
@@ -52,13 +49,14 @@ export class SignUpPage
       zoneinfo: 'Africa/Johannesburg'
     };
 
+    
+
     Auth.signUp(newUser).then(
       (value: any) => this.signedUp(value),
       (reason: any) => this.handleReject(reason));
   }
 
-  signedUp(value: any)
-  {
+  signedUp(value: any) {
     this.toastCtrl.create({
       message: 'Account registered. Check your e-mail for a verification code.',
       showCloseButton: true,
@@ -69,18 +67,16 @@ export class SignUpPage
     this.navCtrl.push(ActivatePage, { email: this.email });
   }
 
-  handleReject(reason: any)
-  {
-    if (reason.code === 'UsernameExistsException')
-    {
+  handleReject(reason: any) {
+    if (reason.code === 'UsernameExistsException') {
       this.toastCtrl.create({
         message: 'This e-mail address is already registered. Recover password?',
         showCloseButton: true,
         dismissOnPageChange: false
       }).present();
       this.loading.dismiss();
-    } else
-    {
+    }
+    else {
       this.toastCtrl.create({
         message: reason.message,
         showCloseButton: true

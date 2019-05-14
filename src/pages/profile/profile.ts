@@ -4,7 +4,7 @@ import { AuthProvider } from '@fma_providers/auth/auth';
 import { MediaProvider } from '@fma_providers/media/media';
 import { LandingPage } from '@fma_pages/landing/landing';
 import { ENV } from '@fma_env';
-import { DataProvider } from '@fma_providers/data/data';
+import { APIGatewayProvider } from '@fma_providers/api-gateway/api-gateway';
 import { FmaAvatarEditorComponent } from '@fma_components/fma-avatar-editor/fma-avatar-editor';
 import { ImagePicker, OutputType } from '@ionic-native/image-picker';
 
@@ -23,7 +23,7 @@ export class ProfilePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController, public loader: LoadingController,
     public modalCtrl: ModalController,
-    private auth: AuthProvider, private data: DataProvider,
+    private auth: AuthProvider, private data: APIGatewayProvider,
     private media: MediaProvider,
     private imagePicker: ImagePicker) {
 

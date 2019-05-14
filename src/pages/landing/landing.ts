@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Loading, LoadingController, ToastController, NavController, Content, ScrollEvent } from 'ionic-angular';
 import { Observable, Subject } from 'rxjs';
 
-import { DataProvider } from '@fma_providers/data/data';
+import { APIGatewayProvider } from '@fma_providers/api-gateway/api-gateway';
 import { ServiceSubcribersPage } from '@fma_pages/service-subcribers/service-subcribers';
 
 import 'rxjs/add/operator/map';
@@ -26,7 +26,7 @@ export class LandingPage {
   subscribers: any;
   error: any;
 
-  constructor(private dataSvc: DataProvider, private loader: LoadingController,
+  constructor(private dataSvc: APIGatewayProvider, private loader: LoadingController,
     private toastCtrl: ToastController, public navCtrl: NavController) {
 
     this.contentScroll = new Subject<ScrollEvent>();

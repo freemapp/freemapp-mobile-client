@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { DataProvider } from '@fma_providers/data/data';
+import { APIGatewayProvider } from '@fma_providers/api-gateway/api-gateway';
 
 /**
  * Generated class for the ServiceSubcribersPage page.
@@ -20,7 +20,7 @@ export class ServiceSubcribersPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private loader: LoadingController, private toastCtrl: ToastController,
-    private dataSvc: DataProvider) {
+    private dataSvc: APIGatewayProvider) {
   }
 
   ionViewDidLoad() {

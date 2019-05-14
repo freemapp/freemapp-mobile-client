@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Auth } from "aws-amplify";
+import { Amplify, CognitoIdentityServiceProvider } from 'aws-sdk';
 import { Observable, Subscriber, Subject, Observer } from 'rxjs';
-import { DataProvider } from '@fma_providers/data/data';
+import { APIGatewayProvider } from '@fma_providers/api-gateway/api-gateway';
 import { ENV } from '@fma_env';
 
 /*
@@ -16,11 +17,12 @@ export class AuthProvider {
 
   credsChanged: Subject<any>;
 
-  constructor(private storage: Storage, private dataSvc: DataProvider) {
+  constructor(private storage: Storage, private dataSvc: APIGatewayProvider) {
     this.credsChanged = new Subject<any>();
   }
 
   public signIn(email: string, password: string): Promise<any> {
+    
     return Auth.signIn(email, password)
       .then((authenticationCreds: any) => {
         return this.dataSvc.getSubscriber(authenticationCreds.username)
