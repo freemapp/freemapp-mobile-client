@@ -42,6 +42,27 @@ export class AuthProvider {
       });
   }
 
+  public signUp(email: string, password: string): Promise<any> {
+    let newUser = {
+      username: email,
+      password: password,
+      locale: 'en_ZA',
+      zoneinfo: 'Africa/Johannesburg'
+    };
+
+    return Auth.signUp(newUser).then(
+      (value: any) => this.signedUp(value));
+  }
+
+  signedUp(value: any): Promise<any> {
+    var subscriber = {
+      subscriberid: value.id,
+      email: value.username
+    };
+
+    return this.dataSvc.createSubscriber(subscriber);
+  }
+
   public signOut(): Promise<any> {
     // return Auth.signOut().then(result => this.clearCreds());
     return this.clearCreds().then(result => Auth.signOut());

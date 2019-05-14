@@ -16,14 +16,18 @@ export class APIGatewayProvider {
     
   }
 
+  public createSubscriber(subscriber: any): Promise<any> {
+    return this.http.post(`${ ENV.apiUrls.subscribers }`, subscriber).toPromise();
+  }
+
   public getSubscribers(filter?: any): Promise<any> {
     filter = filter || {};
 
-    return this.http.get(`${ ENV.dataUrls.subscribers }`, { params: filter }).toPromise();
+    return this.http.get(`${ ENV.apiUrls.subscribers }`, { params: filter }).toPromise();
   }
 
   public getSubscriber(subscriberid: string): Promise<any> {
-     return this.http.get(`${ ENV.dataUrls.subscribers }/${ subscriberid }`).toPromise();
+     return this.http.get(`${ ENV.apiUrls.subscribers }/${ subscriberid }`).toPromise();
   }
 
   public updateSubscriber(subscriber: any): Promise<any> {
@@ -36,14 +40,14 @@ export class APIGatewayProvider {
       response: true
     };
 
-    return this.http.put(`${ ENV.dataUrls.subscribers }/${ subscriber.subscriberid }`, subscriber, apiParameters).toPromise();
+    return this.http.put(`${ ENV.apiUrls.subscribers }/${ subscriber.subscriberid }`, subscriber, apiParameters).toPromise();
   }
 
   public getServices(filter?: any): Promise<any> {
-    return this.http.get(`${ ENV.dataUrls.services }`, { params: filter }).toPromise();
+    return this.http.get(`${ ENV.apiUrls.services }`, { params: filter }).toPromise();
   }
 
   public getService(name: string): Promise<any> {
-    return this.http.get(`${ ENV.dataUrls.services }/${ name }`).toPromise();
+    return this.http.get(`${ ENV.apiUrls.services }/${ name }`).toPromise();
   }
 }
